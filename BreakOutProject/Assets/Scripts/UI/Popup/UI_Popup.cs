@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class UI_Popup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public virtual void Init() { }
+	public virtual void Close()
+	{
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	}
 }
