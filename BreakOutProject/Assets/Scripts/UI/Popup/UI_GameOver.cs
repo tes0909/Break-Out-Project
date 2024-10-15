@@ -20,7 +20,7 @@ public class UI_GameOver : UI_Popup
 	}
 	public void Restart()
 	{
-		//Todo : Gamemanager에서 restart함수 불러와서 사용하기
+		Response();
 	}
 	public override void Close()
 	{

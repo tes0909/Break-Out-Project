@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager
 {
 	#region singleton
 	private static UIManager _instance;
@@ -11,22 +11,25 @@ public class UIManager : MonoBehaviour
 
 	public static void Init()
 	{
-		if(Instance == null)
+
+		if (_instance == null)
 		{
 			_instance = new UIManager();
+			_instance._cache = new Dictionary<string, GameObject>();
+			_instance._popups = new Stack<UI_Popup>();
 		}
 	}
 	#endregion
 
-	private Stack<UI_Popup> _popups = new Stack<UI_Popup>();
-	private Dictionary<string, UI_Popup> _cache = new Dictionary<string, UI_Popup>();
+	private Stack<UI_Popup> _popups;
+	private Dictionary<string, GameObject> _cache;
 	private int _sort = 0;
 	public void OpenPopUpUI(string path, bool caching = true)
 	{
 		if (_cache.ContainsKey(path))
 		{
 			SetCanvas(_cache[path].gameObject);
-			_cache[path].gameObject.SetActive(true);
+			_cache[path].SetActive(true);
 		}
 
 		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/Popup/{path}"));
@@ -34,12 +37,19 @@ public class UIManager : MonoBehaviour
 		if (!caching)
 			return;
 		_popups.Push(go.GetComponent<UI_Popup>());
-		_cache.Add(path, go.GetComponent<UI_Popup>());
+		_cache.Add(path,go);
 	}
 	public void OpenSceneUI()
 	{
 
 	}
+
+	public UI_SubItem CreateSubItemUI(string path,Transform parent=null)
+	{
+		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/SubItem/{path}"), parent);
+		return go.GetComponent<UI_SubItem>() ;
+	}
+
 	public void ClosePopUpUI()
 	{
 		_popups.Pop().Close();
@@ -51,7 +61,7 @@ public class UIManager : MonoBehaviour
 		{
 			if (popup != null && popup.gameObject != null)
 			{
-				Destroy(popup.gameObject);
+				GameObject.Destroy(popup.gameObject);
 			}
 		}
 		_cache.Clear();
