@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: e46005e475a418d43a87d57c5e631d97
+  productGUID: d77a53f7b8b281a4fb3853be4da68be9
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -794,10 +794,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 6be3601b-6514-46e9-9933-13b88cd63aa8
+  cloudProjectId: f4246baf-5442-4ee7-8e6f-e088174a3898
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: BreakOutProject
+  projectName: BreakOutProject 2024-10-15_11-08-15
   organizationId: krosa1213
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
