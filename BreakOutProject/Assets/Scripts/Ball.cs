@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Rigidbody2D BallRigidbody;
+    private Rigidbody2D BallRigidbody;// 공의 BallRigidbody.velocity
     [SerializeField]
-    private float BallSpeed;
+    private float BallSpeed; //공의 스피드
     [SerializeField]
-    private float RotationTorque; // 회전 힘을 위한 변수
-    private int InputDirection;
+    private int InputDirection;//플레이어가 키를 입력했을 때
+    [SerializeField]
+    private float BallRotation;//공의 회전 값
     void Awake()
     {
         BallSpeed = 10f;
-        RotationTorque = 5f; // 회전 힘의 기본값 설정
+        BallRotation = 40f;
+
     }
 
     void Start()
     {
         Rigidbody2D BallRigidbody = GetComponent<Rigidbody2D>();
-        BallRigidbody.AddForce(Vector2.up * BallSpeed, ForceMode2D.Impulse);
+        BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
     }
     private void FixedUpdate()
     {
@@ -42,24 +44,33 @@ public class Ball : MonoBehaviour
         Vector2 bounceDirection = collision.contacts[0].normal;
         BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
 
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))//플레이어 네임테그
         {
-            float rotationTorquePlayer = RotationTorque;
-            if (InputDirection == -1)//플레이어 핸들러가 왼쪽으로 이동할 때
-            {
-                rotationTorquePlayer *= -1f;
-            }
-            else if (InputDirection == 0)
-            {
-                rotationTorquePlayer = 0;
-            }
-            RotateArm(rotationTorquePlayer);
+            RotateArm();
         }
     }
-    private void RotateArm(float RotateLeftRight)
+    private void RotateArm()
     {
-        Vector2 direction = new Vector2(0, 0);
-        float rotz = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(0, 0, rotz);
+        float BallRotationEX = BallRotation;
+        switch (InputDirection)
+        {
+            case -1:
+                BallRotationEX = BallRotation;//플레이어 핸들러가 왼쪽으로 이동할 때
+                break;
+            case 0:
+                int zeroRadom = Random.Range(-1, 2);
+                BallRotationEX = (BallRotation * zeroRadom);//회전값이 -1,0,1중 하나가 됨
+                break;
+            case 1:
+                BallRotationEX = (-1f) * BallRotation;//플레이어 핸들러가 오른쪽으로 이동할 때
+                break;
+            default:
+                break;
+        }
+        Debug.Log(BallRotationEX);
+        //this.transform.rotation = Quaternion.Euler(0, 0, BallRotationEX);
+        // 충돌 시 튕기는 방향을 수정합니다.
+        Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) * Vector2.up; // 위쪽 방향에 회전값을 적용
+        BallRigidbody.velocity = bounceDirection * BallSpeed; // 회전 방향으로 속도 설정
     }
 }
