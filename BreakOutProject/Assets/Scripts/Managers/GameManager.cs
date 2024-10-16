@@ -23,6 +23,8 @@ public interface IGameManager
 public class GameManager : MonoBehaviour, IGameManager
 {
     public static GameManager Instance;
+
+
     public GameState currentState { get; private set; }
 
     private int score; //점수
@@ -31,6 +33,10 @@ public class GameManager : MonoBehaviour, IGameManager
     public event Action<int> OnScoreChanged;
     public event Action<int> OnLifeChanged;
     public event Action OnGameOver;
+    public event Action OnGameClear;
+
+    private InGameScene inGameScene;
+
 
     public int Life
     {
@@ -68,6 +74,11 @@ public class GameManager : MonoBehaviour, IGameManager
     private void Awake()
     {
         //싱글톤
+        Singleton();
+    }
+
+    private void Singleton()
+    {
         if (Instance == null)
         {
             Instance = this;
@@ -81,8 +92,7 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         currentState = GameState.playing;
         Time.timeScale = 1f;
-        score = 0;
-        life = 0;
+
     }
 
     //인게임 입장 시, 3초 카운트 다운 후 게임 시작
@@ -90,7 +100,7 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         Time.timeScale = 0;
         UIManager.Instance.OpenPopUpUI("Countdown");
-        Invoke("GameStart", 3f);
+        Invoke("StartGame", 3f);
     }
 
     public void PauseGame()
