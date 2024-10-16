@@ -9,17 +9,17 @@ public enum SceneName
     InGame
 }
 
-public interface ISceneChange
-{
-    void ChangeScene(SceneName sceneName);
-}
+//public interface ISceneChange
+//{
+//    void ChangeScene(SceneName sceneName);
+//}
 
-public class SceneChange:MonoBehaviour, ISceneChange
+public class SceneChange:MonoBehaviour//, ISceneChange
 {
     //씬 불러오기
 
     //enum은 유니티 UI버튼 onclick에 안보임. int,string,float만 매개변수로 받을수 있음.
-    public void ChangeScene(SceneName sceneName)
+    public static void ChangeScene(SceneName sceneName)
     {
         SceneManager.LoadScene(sceneName.ToString());
     }

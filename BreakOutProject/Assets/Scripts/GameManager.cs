@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour, IGameManager
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            OnGameOver += PauseGame;
         }
         else Destroy(gameObject);
     }
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public void CountDownGameStart()
     {
         Time.timeScale = 0;
+        UIManager.Instance.OpenPopUpUI("Countdown");
         Invoke("GameStart", 3f);
     }
 
@@ -95,8 +97,9 @@ public class GameManager : MonoBehaviour, IGameManager
     public void GameOver()
     {
         currentState = GameState.GameOver;
+        UI_GameOver ui = UIManager.Instance.OpenPopUpUI("GameOverUI") as UI_GameOver;
+        ui.OnResponseEvent += CountDownGameStart;
         OnGameOver?.Invoke();
-
     }
 
     //게임종료

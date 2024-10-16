@@ -17,11 +17,13 @@ public class UI_GameScene : UI_Scene
 	{
 		base.Init();
 		CreateLife();
+		GameManager.Instance.OnLifeChanged += UpdateLife;
+		GameManager.Instance.OnScoreChanged += NowScoreText;
 	}
 	private void CreateLife()
 	{
 		//Todo gamemanager에서 최대 hp가져오기
-		_lifeCount = 3;
+		int _lifeCount = GameManager.Instance.Life;
 		if(_lifeIcons == null || _lifeIcons.Count == 0)
 		{
 			_lifeIcons = new List<UI_LifeIcon>();
@@ -49,10 +51,10 @@ public class UI_GameScene : UI_Scene
 	{
 		_highScoreText.text = highscore.ToString();
 	}
-	public void UpdateLife()
+	public void UpdateLife(int life)
 	{
 		_lifeIcons[_lifeCount].gameObject.SetActive(false);
-		_lifeCount--;
+		_lifeCount = life;
 
 	}
 
