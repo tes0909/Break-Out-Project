@@ -7,17 +7,23 @@ using Random = UnityEngine.Random;
 public class BrickGenenrator : MonoBehaviour
 {
     public float brickRangeXMin;
-    public float brickRangeXMax;
-    public float brickRangeYMin;
-    public float brickRangeYMax;
+    public float brickRangeYTop;
+
+    public float brickSizeX;
+    public float brickSizeY;
+
+    public float brickIntervalX;
+    public float brickIntervalY;
     public enum difficultyLevel : int
     {
-        easy=0,
-        normal=1,
-        hard=2,
-        special=3
+        easy = 0,
+        normal = 1,
+        hard = 2,
+        special = 3
     }
     public BrickPool brickPool;
+
+    private int[,] brickPattern;
     // Start is called before the first frame update
     public void GenenrateBrick(int difficulty)
     {
@@ -55,22 +61,41 @@ public class BrickGenenrator : MonoBehaviour
     private void GenerateNormal()
     {
         ResetBrick();
-        for (int i = 0; i < 15; i++)
-        {
-            GameObject obj = brickPool.GetBrick();
-            obj.SetActive(true);
-            obj.transform.position = new Vector2(Random.Range(brickRangeXMin, brickRangeXMax), Random.Range(brickRangeYMin, brickRangeYMax));
-        }
+
+        brickPattern = new int[5, 8] {{ 1, 1, 1, 1, 1, 1, 1, 1},
+                                      { 1, 2, 1, 2, 2, 1, 2, 1},
+                                      { 1, 1, 1, 1, 1, 1, 1, 1},
+                                      { 0, 0, 0, 0, 0, 0, 0, 0},
+                                      { 0, 0, 0, 0, 0, 0, 0, 0}};
+        GenerateBrickByPattern();
     }
 
     private void GenerateEasy()
     {
         ResetBrick();
-        for (int i = 0; i < 10; i++)
+        brickPattern = new int[5, 8] {{ 1, 0, 1, 0, 1, 0, 1, 0},
+                                      { 0, 1, 0, 1, 0, 1, 0, 1},
+                                      { 1, 0, 1, 0, 1, 0, 1, 0},
+                                      { 0, 0, 0, 0, 0, 0, 0, 0},
+                                      { 0, 0, 0, 0, 0, 0, 0, 0}};
+
+        GenerateBrickByPattern(); 
+    }
+
+    private void GenerateBrickByPattern()
+    {
+        for (int y = 0; y < brickPattern.GetLength(0); y++)
         {
-            GameObject obj = brickPool.GetBrick();
-            obj.SetActive(true);
-            obj.transform.position=new Vector2(Random.Range(brickRangeXMin,brickRangeXMax), Random.Range(brickRangeYMin,brickRangeYMax));
+            for(int x = 0; x < brickPattern.GetLength(1); x++)
+            {
+                if (brickPattern[y, x] > 0)
+                {
+                    GameObject obj = brickPool.GetBrick();
+                    obj.SetActive(true);
+                    obj.transform.position = new Vector2(brickRangeXMin + brickSizeX * x + brickIntervalX * x, brickRangeYTop - brickSizeY * y - brickIntervalY * y);
+                    obj.GetComponent<Brick>().SetDurability(brickPattern[y,x]);
+                }
+            }
         }
     }
 

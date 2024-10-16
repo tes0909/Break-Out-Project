@@ -171,6 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abdad5b1f2eae1469eba96a34d6bd59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSprite: {fileID: 21300000, guid: 5d0d5ca2247ba6e4a8e8cd7f724f318d, type: 3}
-  hardSprite: {fileID: 21300000, guid: 26a4b2d685becae45abdc70ffa94a3e6, type: 3}
-  brokenSprite: {fileID: 21300000, guid: 411f9bf2b53014b46a8ee4dc8e43ee1e, type: 3}
+  normalSprite: {fileID: 1968673778, guid: 5d0d5ca2247ba6e4a8e8cd7f724f318d, type: 3}
+  hardSprite: {fileID: 1127166475, guid: d4ddf38721ce0134c934c7ce291969f0, type: 3}
+  brokenSprite: {fileID: 976166548, guid: 411f9bf2b53014b46a8ee4dc8e43ee1e, type: 3}
