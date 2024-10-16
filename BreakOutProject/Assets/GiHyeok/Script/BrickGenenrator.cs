@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum difficultyLevel : int
+{
+	easy = 0,
+	normal = 1,
+	hard = 2,
+	special = 3,
+    end,
+}
 public class BrickGenenrator : MonoBehaviour
 {
     public float brickRangeXMin;
@@ -14,13 +22,7 @@ public class BrickGenenrator : MonoBehaviour
 
     public float brickIntervalX;
     public float brickIntervalY;
-    private enum difficultyLevel : int
-    {
-        easy = 0,
-        normal = 1,
-        hard = 2,
-        special = 3
-    }
+
     public BrickPool brickPool;
 
     private int[,] brickPattern;

@@ -13,9 +13,8 @@ public class UI_GameScene : UI_Scene
 	private List<UI_LifeIcon> _lifeIcons;
 	private int _lifeCount;
 
-	public override void Init()
+	private void Awake()
 	{
-		base.Init();
 		CreateLife();
 		GameManager.Instance.OnLifeChanged += UpdateLife;
 		GameManager.Instance.OnScoreChanged += NowScoreText;

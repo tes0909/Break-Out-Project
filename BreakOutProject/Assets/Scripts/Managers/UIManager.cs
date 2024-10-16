@@ -26,21 +26,24 @@ public class UIManager
 	private int _sort = 0;
 	public UI_Popup OpenPopUpUI(string path, bool caching = true)
 	{
+		GameObject go;
 		if (_cache.ContainsKey(path))
 		{
-			SetCanvas(_cache[path].gameObject);
-			_cache[path].SetActive(true);
+			go = _cache[path].gameObject;
+		}
+		else
+		{
+			go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/Popup/{path}"));
+			if (caching)
+				_cache.Add(path, go);
 		}
 
-		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/Popup/{path}"));
 		SetCanvas(go);
+		go.SetActive(true);
 		_popups.Add(path, go.GetComponent<UI_Popup>());
-		if (caching)
-		{
-			_cache.Add(path, go);
-		}
 		return go.GetComponent<UI_Popup>();
 	}
+
 	public UI_Scene OpenSceneUI(string path)
 	{
 		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/Scene/{path}"));
@@ -57,6 +60,7 @@ public class UIManager
 	public void ClosePopUpUI(string path)
 	{
 		_popups[path].Close();
+		_popups.Remove(path);
 		_sort--;
 	}
 	public void ClearCache()
@@ -73,7 +77,7 @@ public class UIManager
 	}
 	private void SetCanvas(GameObject go, bool sort = true)
 	{
-		go.GetComponent<Canvas>().sortingOrder = sort ? _sort++ : 0;
+		go.GetComponent<Canvas>().sortingOrder = sort ? ++_sort : 0;
 	}
 
 

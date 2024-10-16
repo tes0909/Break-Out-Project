@@ -8,12 +8,10 @@ public class UI_LobbyScene : UI_Scene
 {
 	[SerializeField] private GameObject _background;
 
-	public override void Init()
+	private void Awake()
 	{
-		base.Init();
 		UI_ClickHandler backgroundClick = _background.AddComponent<UI_ClickHandler>();
 		backgroundClick.OnClickEvent += LoadGameScene;
-
 	}
 
 	private void LoadGameScene(PointerEventData data)
@@ -21,5 +19,4 @@ public class UI_LobbyScene : UI_Scene
 		Debug.Log("clicked");
 		SceneChange.ChangeScene(SceneName.InGame);
 	}
-
 }
