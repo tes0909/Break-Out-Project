@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeControlItem : Item
+public class TimeControlItem : test.Item
 {
 	private float _controlTime;
 	public override void Spawn(Vector2 position, float duration ,float speed)

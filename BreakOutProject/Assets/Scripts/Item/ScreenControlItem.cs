@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ScreenControlItem : Item
+public class ScreenControlItem : test.Item
 {
 	private string[] BlackoutEffects = { "ItemEffect/BlackOutUI", "ItemEffect/HalfBlackOutUI" };
 	private int index = -1;
