@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public interface ITimeManager
+{
+    float CurrentTime { get; }
+    void StartTimer();
+    void ResetTimer();
+}
+
+public class TimeManager : MonoBehaviour, ITimeManager
 {
     [SerializeField][Range(1,120)] private int maxTime;
     private float currentTime;
+    public float CurrentTime => currentTime;
 
-    public TMP_Text TimerTxt;
 
     //게임 시간 타이머
     public void Timer()
     {
         currentTime -= Time.deltaTime; //deltaTime을 정수형으로 형변환하면, 타이머 작동안함.
-        TimerTxt.text = currentTime.ToString("F2"); //소숫점 2자리까지 표시.
 
         if(currentTime <= 0)
         {
@@ -22,13 +28,25 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void StartTimer()
+    {
+        currentTime = maxTime;
+
+    }
+
+    public void ResetTimer()
     {
         currentTime = maxTime;
     }
 
     private void FixedUpdate()
     {
-        Timer();
+        if (GameManager.Instance.currentState == GameState.playing)
+        {
+            Timer();
+        }
+        
     }
+
+
 }
