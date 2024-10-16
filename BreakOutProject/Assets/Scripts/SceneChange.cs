@@ -2,26 +2,39 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static SceneChange;
 
-public class SceneChange:MonoBehaviour
+public enum SceneName
 {
-    public enum SceneName
-    {
-        Lobby,
-        SelectMode,
-        InGame
-    }
+    Lobby,
+    SelectMode,
+    InGame
+}
 
+public interface ISceneChange
+{
+    void ChangeScene(SceneName sceneName);
+}
+
+public class SceneChange:MonoBehaviour, ISceneChange
+{
     //씬 불러오기
-    public void ChangeScene(int sceneIndex)
-    {
-        SceneName scene = (SceneName)sceneIndex; //정수받고 -> enum으로
-        string sceneName = scene.ToString(); //enum -> string
-        SceneManager.LoadScene(sceneName);
-    }
 
     //enum은 유니티 UI버튼 onclick에 안보임. int,string,float만 매개변수로 받을수 있음.
-    public void ChangeScene2(SceneName sceneName)
+    public void ChangeScene(SceneName sceneName)
     {
         SceneManager.LoadScene(sceneName.ToString());
+    }
+
+    //테스트
+    public void LoadInGameScene()
+    {
+        ChangeScene(SceneName.InGame);
+    }
+    public void LoadLobbyScene()
+    {
+        ChangeScene(SceneName.Lobby);
+    }
+    public void LoadSelectModeScene()
+    {
+        ChangeScene(SceneName.SelectMode);
     }
 }

@@ -1,16 +1,36 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public enum GameState
+{
+    playing,
+    paused,
+    GameOver,
+    LevelCleared
+}
+
+public interface IGameManager
+{
+    GameState currentState { get; }
+    int Score { get; set; }
+    int Life { get; set; }
+    void StartGame();
+    void PauseGame();
+    void GameOver();
+    void QuitGame();
+}
+
+public class GameManager : MonoBehaviour, IGameManager
 {
     public static GameManager Instance;
+    public GameState currentState { get; private set; }
+
     private int score; //점수
     private int life = 3; //임의로 목숨 3개
 
     public event Action<int> OnScoreChanged;
     public event Action<int> OnLifeChanged;
+    public event Action OnGameOver;
 
     public int Life
     {
@@ -18,7 +38,7 @@ public class GameManager : MonoBehaviour
         set
         {
             //라이프 값이 변하면
-            if(life != value)
+            if (life != value)
             {
                 life = value;
                 OnLifeChanged?.Invoke(life);
@@ -31,10 +51,14 @@ public class GameManager : MonoBehaviour
         get => score;
         set
         {
-            if(score != value)
+            if (score != value)
             {
                 score = value;
                 OnScoreChanged?.Invoke(score);
+                if(life <= 0)
+                {
+                    GameOver();
+                }
             }
         }
     }
@@ -43,15 +67,15 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //싱글톤
-        if(Instance == null)
-        { 
-            Instance = this; 
+        if (Instance == null)
+        {
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
     }
 
-    public void GameStart()
+    public void StartGame()
     {
         Time.timeScale = 1f;
     }
@@ -68,8 +92,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    public void GameOver()
+    {
+        currentState = GameState.GameOver;
+        OnGameOver?.Invoke();
+
+    }
+
     //게임종료
-    public void GameQuit()
+    public void QuitGame()
     {
         Application.Quit();
     }

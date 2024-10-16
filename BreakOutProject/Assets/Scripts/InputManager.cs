@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
 
     private const float LeftBoundary = -8.1f;
     private const float RightBoundary = 8.1f;
-
+    public float horizontal;
     void Start()
     {
        rb = GetComponent<Rigidbody2D>();
@@ -26,8 +26,8 @@ public class InputManager : MonoBehaviour
 
     void PaddleMovement()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-
+        horizontal = Input.GetAxisRaw("Horizontal");
+       
         Vector2 direction = new Vector2(horizontal, 0);
         direction = direction.normalized;
 

@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     private int InputDirection;//플레이어가 키를 입력했을 때
     [SerializeField]
     private float BallRotation;//공의 회전 값
+    InputManager inputManager;
     void Awake()
     {
         BallSpeed = 10f;
@@ -20,24 +21,25 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
+        inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
         Rigidbody2D BallRigidbody = GetComponent<Rigidbody2D>();
         BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
     }
-    private void FixedUpdate()
-    {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            InputDirection = -1; // 왼쪽 이동
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            InputDirection = 1; // 오른쪽 이동
-        }
-        else// 안움직이면
-        {
-            InputDirection = 0;
-        }
-    }
+    //private void FixedUpdate()
+    //{
+    //    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+    //    {
+    //        InputDirection = -1; // 왼쪽 이동
+    //    }
+    //    else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+    //    {
+    //        InputDirection = 1; // 오른쪽 이동
+    //    }
+    //    else// 안움직이면
+    //    {
+    //        InputDirection = 0;
+    //    }
+    //}
     private void OnCollisionEnter2D(Collision2D collision)
     {
         BallRigidbody = GetComponent<Rigidbody2D>();
@@ -52,16 +54,16 @@ public class Ball : MonoBehaviour
     private void RotateArm()
     {
         float BallRotationEX = BallRotation;
-        switch (InputDirection)
+        switch (inputManager.horizontal)
         {
-            case -1:
+            case -1f:
                 BallRotationEX = BallRotation;//플레이어 핸들러가 왼쪽으로 이동할 때
                 break;
-            case 0:
+            case 0f:
                 int zeroRadom = Random.Range(-1, 2);
                 BallRotationEX = (BallRotation * zeroRadom);//회전값이 -1,0,1중 하나가 됨
                 break;
-            case 1:
+            case 1f:
                 BallRotationEX = (-1f) * BallRotation;//플레이어 핸들러가 오른쪽으로 이동할 때
                 break;
             default:
