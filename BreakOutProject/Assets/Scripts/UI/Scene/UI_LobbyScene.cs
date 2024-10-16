@@ -18,7 +18,8 @@ public class UI_LobbyScene : UI_Scene
 
 	private void LoadGameScene(PointerEventData data)
 	{
-		// TODO. Scene Manager를 참조하여 GameScene으로 넘어가도록
+		Debug.Log("clicked");
+		SceneChange.ChangeScene(SceneName.InGame);
 	}
 
 }

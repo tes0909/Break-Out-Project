@@ -24,7 +24,7 @@ public class TimeManager : MonoBehaviour, ITimeManager
 
         if(currentTime <= 0)
         {
-            GameManager.Instance.PauseGame();
+            GameManager.Instance.GameOver();
         }
     }
 

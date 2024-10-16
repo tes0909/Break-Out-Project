@@ -24,7 +24,7 @@ public class UIManager
 	private Stack<UI_Popup> _popups;
 	private Dictionary<string, GameObject> _cache;
 	private int _sort = 0;
-	public void OpenPopUpUI(string path, bool caching = true)
+	public UI_Popup OpenPopUpUI(string path, bool caching = true)
 	{
 		if (_cache.ContainsKey(path))
 		{
@@ -34,14 +34,18 @@ public class UIManager
 
 		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/Popup/{path}"));
 		SetCanvas(go);
-		if (!caching)
-			return;
-		_popups.Push(go.GetComponent<UI_Popup>());
-		_cache.Add(path,go);
+		if (caching)
+		{
+			_popups.Push(go.GetComponent<UI_Popup>());
+			_cache.Add(path, go);
+		}
+		return go.GetComponent<UI_Popup>();
 	}
-	public void OpenSceneUI()
+	public UI_Scene OpenSceneUI(string path)
 	{
-
+		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/Scene/{path}"));
+		SetCanvas(go,false);
+		return go.GetComponent<UI_Scene>();
 	}
 
 	public UI_SubItem CreateSubItemUI(string path,Transform parent=null)
