@@ -14,7 +14,6 @@ public class UI_CountDown : UI_Popup
 	{
 		base.Init();
 		StartCoroutine(StartCountdown());
-
 	}
 	private IEnumerator StartCountdown()
 	{
@@ -25,6 +24,6 @@ public class UI_CountDown : UI_Popup
 			yield return waittime;
 			remainTime--;
 		}
-		UIManager.Instance.ClosePopUpUI();
+		UIManager.Instance.ClosePopUpUI("CountdownUI");
 	}
 }

@@ -16,12 +16,12 @@ public class UIManager
 		{
 			_instance = new UIManager();
 			_instance._cache = new Dictionary<string, GameObject>();
-			_instance._popups = new Stack<UI_Popup>();
+			_instance._popups = new Dictionary<string, UI_Popup>();
 		}
 	}
 	#endregion
 
-	private Stack<UI_Popup> _popups;
+	private Dictionary<string, UI_Popup> _popups;
 	private Dictionary<string, GameObject> _cache;
 	private int _sort = 0;
 	public UI_Popup OpenPopUpUI(string path, bool caching = true)
@@ -34,9 +34,9 @@ public class UIManager
 
 		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/Popup/{path}"));
 		SetCanvas(go);
+		_popups.Add(path, go.GetComponent<UI_Popup>());
 		if (caching)
 		{
-			_popups.Push(go.GetComponent<UI_Popup>());
 			_cache.Add(path, go);
 		}
 		return go.GetComponent<UI_Popup>();
@@ -54,9 +54,9 @@ public class UIManager
 		return go.GetComponent<UI_SubItem>() ;
 	}
 
-	public void ClosePopUpUI()
+	public void ClosePopUpUI(string path)
 	{
-		_popups.Pop().Close();
+		_popups[path].Close();
 		_sort--;
 	}
 	public void ClearCache()
