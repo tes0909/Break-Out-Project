@@ -9,15 +9,21 @@ public class InGameScene : BaseScene
 	{
 		base.Awake();
 		UIManager.Instance.OpenSceneUI("GameSceneUI");
-
-		GameObject paddle = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Paddle"));
-		paddle.transform.position = _paddleInitPosition;
-
-		GameObject brickManager = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Brick/BrickManager"));
-		
 	}
 
-	protected override void Close()
+    private void Start()
+    {
+        if (GameManager.Instance.currentState == GameState.playing)
+        {
+            GameObject paddle = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Paddle"));
+            paddle.transform.position = _paddleInitPosition;
+
+            GameObject brickManager = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Brick/BrickManager"));
+        }
+    }
+
+
+    protected override void Close()
 	{
 		return;
 	}
