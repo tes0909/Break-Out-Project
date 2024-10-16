@@ -43,8 +43,11 @@ public class ScoreboardManager : MonoBehaviour
         {
             scoreData.highScore = newScore;
         }
-
-        AddScore(newScore);
+        if(GameState.GameOver == GameManager.Instance.currentState || GameState.LevelCleared == GameManager.Instance.currentState)
+        {
+            AddScore(newScore);
+        }
+        
     }
 
     public void AddScore(int score)
