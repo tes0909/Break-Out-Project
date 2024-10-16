@@ -14,7 +14,7 @@ public class BrickGenenrator : MonoBehaviour
 
     public float brickIntervalX;
     public float brickIntervalY;
-    public enum difficultyLevel : int
+    private enum difficultyLevel : int
     {
         easy = 0,
         normal = 1,
