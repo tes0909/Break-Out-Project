@@ -20,6 +20,7 @@ public class UI_GameOver : UI_Popup
 	}
 	public void Restart()
 	{
+		UIManager.Instance.ClosePopUpUI();
 		Response();
 	}
 	public override void Close()
