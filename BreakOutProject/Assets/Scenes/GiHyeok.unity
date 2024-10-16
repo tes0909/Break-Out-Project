@@ -787,10 +787,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38448171a82aca478e698f5ea19af34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickRangeXMin: -7.5
-  brickRangeXMax: 7.5
-  brickRangeYMin: -2
-  brickRangeYMax: 3.5
+  brickRangeXMin: -7
+  brickRangeYTop: 3.5
+  brickSizeX: 1.8
+  brickSizeY: 0.8
+  brickIntervalX: 0.2
+  brickIntervalY: 0.2
   brickPool: {fileID: 1464379902}
 --- !u!1 &1464379901
 GameObject:
@@ -822,7 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickPrefab: {fileID: 5614627413939252316, guid: 2b796d092d1b7c24ab59a897568409c6, type: 3}
-  maxbrick: 20
+  maxbrick: 30
 --- !u!4 &1464379903
 Transform:
   m_ObjectHideFlags: 0
