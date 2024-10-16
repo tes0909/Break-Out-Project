@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour, IGameManager
             {
                 life = value;
                 OnLifeChanged?.Invoke(life);
+                if (life <= 0)
+                {
+                    GameOver();
+                }
             }
         }
     }
@@ -55,10 +59,7 @@ public class GameManager : MonoBehaviour, IGameManager
             {
                 score = value;
                 OnScoreChanged?.Invoke(score);
-                if(life <= 0)
-                {
-                    GameOver();
-                }
+
             }
         }
     }
@@ -78,7 +79,10 @@ public class GameManager : MonoBehaviour, IGameManager
 
     public void StartGame()
     {
+        currentState = GameState.playing;
         Time.timeScale = 1f;
+        score = 0;
+        life = 0;
     }
 
     //인게임 입장 시, 3초 카운트 다운 후 게임 시작
@@ -91,6 +95,7 @@ public class GameManager : MonoBehaviour, IGameManager
 
     public void PauseGame()
     {
+        currentState = GameState.paused;
         Time.timeScale = 0f;
     }
 
