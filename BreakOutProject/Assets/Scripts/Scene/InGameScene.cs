@@ -14,7 +14,7 @@ public class InGameScene : BaseScene
 		paddle.transform.position = _paddleInitPosition;
 
 		GameObject brickManager = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Brick/BrickManager"));
-
+		
 	}
 
 	protected override void Close()
