@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class UI_LobbyScene : UI_Scene
 {
 	[SerializeField] private GameObject _background;
-
+	[SerializeField] private SceneChange sceneChange; //인스펙터에서 할당
 	public override void Init()
 	{
 		base.Init();
@@ -19,7 +19,7 @@ public class UI_LobbyScene : UI_Scene
 	private void LoadGameScene(PointerEventData data)
 	{
 		Debug.Log("clicked");
-		SceneChange.ChangeScene(SceneName.InGame);
+        sceneChange.ChangeScene(SceneName.InGame);
 	}
 
 }
