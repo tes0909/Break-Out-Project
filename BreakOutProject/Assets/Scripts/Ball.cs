@@ -25,21 +25,7 @@ public class Ball : MonoBehaviour
         Rigidbody2D BallRigidbody = GetComponent<Rigidbody2D>();
         BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
     }
-    //private void FixedUpdate()
-    //{
-    //    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-    //    {
-    //        InputDirection = -1; // 왼쪽 이동
-    //    }
-    //    else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-    //    {
-    //        InputDirection = 1; // 오른쪽 이동
-    //    }
-    //    else// 안움직이면
-    //    {
-    //        InputDirection = 0;
-    //    }
-    //}
+ 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         SoundManager.SoundInstance.PlaySFX(SoundManager.SoundInstance.SFX_Clips[1]);
