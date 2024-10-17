@@ -12,11 +12,15 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private float BallRotation;//공의 회전 값
     InputManager inputManager;
+
+    protected BallStatHandler ballStats { get; private set; }
     void Awake()
     {
-        BallSpeed = 10f;
-        BallRotation = 40f;
-
+        ballStats = GetComponent<BallStatHandler>();
+        //BallSpeed = 10f;
+        BallSpeed = ballStats.CurrentStat.currentSpeed;
+        //BallRotation = 40f;
+        BallRotation = ballStats.CurrentStat.currentRotate;
     }
 
     void Start()

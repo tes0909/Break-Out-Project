@@ -9,7 +9,7 @@ public class SFXSoundVolume : MonoBehaviour
     public float AudioVolume;
     private void Start()
     {
-        AudioVolume = PlayerPrefs.GetFloat("Volume", 1f); // 저장된 볼륨 가져오기
+        AudioVolume = PlayerPrefs.GetFloat("SFXVolume", 1f); // 저장된 볼륨 가져오기
         audioSource = GetComponent<AudioSource>();
         if(SoundManager.SoundInstance!= null)
         {
@@ -19,7 +19,7 @@ public class SFXSoundVolume : MonoBehaviour
     public void SFXSlideChanged(float value)
     {
         AudioVolume = value; // 슬라이더 값으로 AudioVolume 업데이트
-        PlayerPrefs.SetFloat("Volume", AudioVolume); // 볼륨 저장
+        PlayerPrefs.SetFloat("SFXVolume", AudioVolume); // 볼륨 저장
         audioSource.volume = AudioVolume; // AudioSource의 볼륨 설정
         SoundManager.SoundInstance.SFXSize = value;
         Debug.Log(SoundManager.SoundInstance.SFXSize);
