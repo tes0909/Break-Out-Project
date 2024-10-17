@@ -86,7 +86,8 @@ public class GameManager : MonoBehaviour, IGameManager
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            OnGameOver += PauseGame;
+			currentState = GameState.paused;
+			OnGameOver += PauseGame;
         }
         else Destroy(gameObject);
     }

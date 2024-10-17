@@ -7,7 +7,9 @@ public class LobbyScene : BaseScene
 	protected override void Awake()
 	{
 		base.Awake();
-		InitGameManager();
+		//InitGameManager();
+		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/@GameManager"));
+		go.name = "@GameManager";
 		UIManager.Instance.OpenSceneUI("LobbySceneUI");
 	}
 
