@@ -9,8 +9,7 @@ public class UI_CountDown : UI_Popup
 
 	private const int START_DELAY =  3;
 	private WaitForSecondsRealtime waittime = new WaitForSecondsRealtime(1f);
-
-	private void Start()
+	private void OnEnable()
 	{
 		StartCoroutine(StartCountdown());
 	}

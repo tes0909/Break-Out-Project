@@ -51,7 +51,7 @@ MonoBehaviour:
   brickSizeY: 0.8
   brickIntervalX: 0.2
   brickIntervalY: 0.2
-  brickPool: {fileID: 0}
+  brickPool: {fileID: 8445728438973504739}
 --- !u!114 &8445728438973504739
 MonoBehaviour:
   m_ObjectHideFlags: 0

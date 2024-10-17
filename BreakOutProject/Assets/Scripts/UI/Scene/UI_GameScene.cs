@@ -22,6 +22,8 @@ public class UI_GameScene : UI_Scene
 
 		if(ScoreboardManager.Instance.Scores.Count > 0 && ScoreboardManager.Instance.Scores !=null)
 			_highScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
+
+		GameManager.Instance.gameObject.GetComponent<TimeManager>().OnChangeTime += UpdateTimerText;
 	}
 
 	private void CreateLife()
@@ -46,7 +48,7 @@ public class UI_GameScene : UI_Scene
 
 	public void UpdateTimerText(float time)
 	{
-		_timerText.text = time.ToString("D2");
+		_timerText.text = time.ToString("F2");
 	}
 
 	public void NowScoreText(int score)
