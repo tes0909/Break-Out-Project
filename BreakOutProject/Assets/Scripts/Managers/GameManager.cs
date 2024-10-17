@@ -15,6 +15,7 @@ public interface IGameManager
     int Score { get; set; }
     int Life { get; set; }
     void StartGame();
+    void CountDownGameStart();
     void PauseGame();
     void GameOver();
     void QuitGame();
@@ -23,7 +24,10 @@ public interface IGameManager
 public class GameManager : MonoBehaviour, IGameManager
 {
     public static GameManager Instance;
+
+
     public GameState currentState { get; private set; }
+    public int DifficultyLevel { get; private set; }
 
     private int score; //점수
     private int life = 3; //임의로 목숨 3개
@@ -31,6 +35,11 @@ public class GameManager : MonoBehaviour, IGameManager
     public event Action<int> OnScoreChanged;
     public event Action<int> OnLifeChanged;
     public event Action OnGameOver;
+    public event Action OnGameClear;
+    public event Action<int> OnGameStart;
+
+    private InGameScene inGameScene;
+
 
     public int Life
     {
@@ -42,6 +51,10 @@ public class GameManager : MonoBehaviour, IGameManager
             {
                 life = value;
                 OnLifeChanged?.Invoke(life);
+                if (life <= 0)
+                {
+                    GameOver();
+                }
             }
         }
     }
@@ -55,10 +68,7 @@ public class GameManager : MonoBehaviour, IGameManager
             {
                 score = value;
                 OnScoreChanged?.Invoke(score);
-                if(life <= 0)
-                {
-                    GameOver();
-                }
+
             }
         }
     }
@@ -67,41 +77,57 @@ public class GameManager : MonoBehaviour, IGameManager
     private void Awake()
     {
         //싱글톤
+        Singleton();
+    }
+
+    private void Singleton()
+    {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            OnGameOver += PauseGame;
         }
         else Destroy(gameObject);
     }
 
     public void StartGame()
     {
+        currentState = GameState.playing;
         Time.timeScale = 1f;
+        OnGameStart?.Invoke(DifficultyLevel);
+        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
+
     }
 
-    //인게임 입장 시, 3초 카운트 다운 후 게임 시작
     public void CountDownGameStart()
     {
-        Time.timeScale = 0;
-        Invoke("GameStart", 3f);
+        Time.timeScale = 1f;
+        UIManager.Instance.OpenPopUpUI("CountdownUI");
+        Invoke("StartGame", 3f);
     }
 
     public void PauseGame()
     {
+        currentState = GameState.paused;
         Time.timeScale = 0f;
     }
 
     public void GameOver()
     {
         currentState = GameState.GameOver;
+        UI_GameOver ui = UIManager.Instance.OpenPopUpUI("GameOverUI") as UI_GameOver;
+        ui.OnResponseEvent += CountDownGameStart;
         OnGameOver?.Invoke();
-
     }
 
-    //게임종료
     public void QuitGame()
     {
         Application.Quit();
     }
+    
+    public void SetDifficultyLevel(difficultyLevel difficultyLevel)
+    {
+        DifficultyLevel = (int)difficultyLevel;
+	}
 }

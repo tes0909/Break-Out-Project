@@ -8,17 +8,17 @@ public class UI_LobbyScene : UI_Scene
 {
 	[SerializeField] private GameObject _background;
 
-	public override void Init()
+	private SceneChange sceneChange;
+    private void Awake()
 	{
-		base.Init();
+		sceneChange = GameObject.Find("@GameManager").GetComponent<SceneChange>();
 		UI_ClickHandler backgroundClick = _background.AddComponent<UI_ClickHandler>();
-		backgroundClick.OnClickEvent += LoadGameScene;
-
+		backgroundClick.OnClickEvent += LoadSelectScene;
 	}
 
-	private void LoadGameScene(PointerEventData data)
+	private void LoadSelectScene(PointerEventData data)
 	{
-		// TODO. Scene Manager를 참조하여 GameScene으로 넘어가도록
+		Debug.Log("clicked");
+        sceneChange.ChangeScene(SceneName.SelectMode);
 	}
-
 }

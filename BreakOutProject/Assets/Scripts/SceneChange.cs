@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static SceneChange;
+using UnityEngine.UI;
 
 public enum SceneName
 {
@@ -9,25 +10,54 @@ public enum SceneName
     InGame
 }
 
-public interface ISceneChange
+public class SceneChange : MonoBehaviour//, ISceneChange
 {
-    void ChangeScene(SceneName sceneName);
-}
+    IGameManager gameManaer;
 
-public class SceneChange:MonoBehaviour, ISceneChange
-{
-    //씬 불러오기
+    [SerializeField] private Image fadeImage;
+    private float fadeDuration = 1.3f;
 
-    //enum은 유니티 UI버튼 onclick에 안보임. int,string,float만 매개변수로 받을수 있음.
     public void ChangeScene(SceneName sceneName)
     {
+		//StartCoroutine(Trasition(sceneName));
+		SceneManager.LoadScene(sceneName.ToString());
+		Debug.Log("코루틴실행");
+    }
+
+    private IEnumerator Trasition(SceneName sceneName)
+    {
+        //페이드인
+        float elapsed = 0f;
+        Color color = fadeImage.color;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(0f, 1f, elapsed / fadeDuration);
+            fadeImage.color = color;
+            yield return null;
+        }
+
         SceneManager.LoadScene(sceneName.ToString());
+
+        ////페이드아웃
+        //elapsed = 0f;
+        //while(elapsed < fadeDuration)
+        //{
+        //    elapsed += Time.deltaTime;
+        //    color.a = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+        //    fadeImage.color = color;
+        //    yield return null;
+        //}
+
     }
 
     //테스트
     public void LoadInGameScene()
     {
         ChangeScene(SceneName.InGame);
+        gameManaer.CountDownGameStart();
+
     }
     public void LoadLobbyScene()
     {

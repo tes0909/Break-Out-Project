@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UI_GameScene : UI_Scene
@@ -13,15 +14,20 @@ public class UI_GameScene : UI_Scene
 	private List<UI_LifeIcon> _lifeIcons;
 	private int _lifeCount;
 
-	public override void Init()
+	private void Awake()
 	{
-		base.Init();
 		CreateLife();
+		GameManager.Instance.OnLifeChanged += UpdateLife;
+		GameManager.Instance.OnScoreChanged += NowScoreText;
+
+		if(ScoreboardManager.Instance.Scores.Count > 0 && ScoreboardManager.Instance.Scores !=null)
+			_highScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
 	}
+
 	private void CreateLife()
 	{
 		//Todo gamemanager에서 최대 hp가져오기
-		_lifeCount = 3;
+		int _lifeCount = GameManager.Instance.Life;
 		if(_lifeIcons == null || _lifeIcons.Count == 0)
 		{
 			_lifeIcons = new List<UI_LifeIcon>();
@@ -37,23 +43,21 @@ public class UI_GameScene : UI_Scene
 		}
 
 	}
+
 	public void UpdateTimerText(float time)
 	{
 		_timerText.text = time.ToString("D2");
 	}
+
 	public void NowScoreText(int score)
 	{
 		_nowScoreText.text = score.ToString();
 	}
-	public void HighScoreText(int highscore)
-	{
-		_highScoreText.text = highscore.ToString();
-	}
-	public void UpdateLife()
+
+	public void UpdateLife(int life)
 	{
 		_lifeIcons[_lifeCount].gameObject.SetActive(false);
-		_lifeCount--;
-
+		_lifeCount = life;
 	}
 
 }

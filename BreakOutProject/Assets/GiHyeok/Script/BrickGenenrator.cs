@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum difficultyLevel : int
+{
+	easy = 0,
+	normal = 1,
+	hard = 2,
+	special = 3,
+    end,
+}
 public class BrickGenenrator : MonoBehaviour
 {
     public float brickRangeXMin;
@@ -14,18 +22,17 @@ public class BrickGenenrator : MonoBehaviour
 
     public float brickIntervalX;
     public float brickIntervalY;
-    public enum difficultyLevel : int
-    {
-        easy = 0,
-        normal = 1,
-        hard = 2,
-        special = 3
-    }
+
     public BrickPool brickPool;
 
     private int[,] brickPattern;
-    // Start is called before the first frame update
-    public void GenenrateBrick(int difficulty)
+	// Start is called before the first frame update
+	private void Awake()
+	{
+        GameManager.Instance.OnGameStart += GenenrateBrick;
+	}
+
+	public void GenenrateBrick(int difficulty)
     {
         difficultyLevel currentDifficulty = (difficultyLevel)difficulty;
         switch (currentDifficulty)

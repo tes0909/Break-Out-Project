@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class Brick : MonoBehaviour
 {
-    private Color color= new Color (255f,255f,255f);
+    private Color color = new Color(255f, 255f, 255f);
     private int maxDurability { get; set; }
     private int currentDurability { get; set; }
 
@@ -40,10 +40,36 @@ public class Brick : MonoBehaviour
             currentDurability--;
             gameObject.SetActive(false);
         }
-        else if(currentDurability == 2)
+        else if (currentDurability == 2)
         {
             currentDurability--;
             gameObject.GetComponent<SpriteRenderer>().sprite = brokenSprite;
         }
-    } 
+    }
+
+    private void DropItem()
+    {
+        int itemDrop = Random.Range(0, 100);
+        GameObject item = GameObject.Find("ItemPool").GetComponent<ItemPool>().GetItem();
+        item.SetActive(true);
+        switch (itemDrop)
+        {
+            case <20: 
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                break;
+
+            case < 40:
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                break;
+
+            case < 60:
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                break;
+
+            case < 80:
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                break;
+        }
+        item.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+    }
 }
