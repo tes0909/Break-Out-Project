@@ -15,6 +15,7 @@ public interface IGameManager
     int Score { get; set; }
     int Life { get; set; }
     void StartGame();
+    void CountDownGameStart();
     void PauseGame();
     void GameOver();
     void QuitGame();
@@ -95,7 +96,6 @@ public class GameManager : MonoBehaviour, IGameManager
 
     }
 
-    //인게임 입장 시, 3초 카운트 다운 후 게임 시작
     public void CountDownGameStart()
     {
         Time.timeScale = 0;

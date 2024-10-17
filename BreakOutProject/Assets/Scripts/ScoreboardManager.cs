@@ -36,21 +36,27 @@ public class ScoreboardManager
 
     private void UpdateHighScore(int newScore)
     {
-        if(newScore > scoreData.highScore)
+        if (newScore > scoreData.highScore)
         {
             scoreData.highScore = newScore;
         }
-        if(GameState.GameOver == GameManager.Instance.currentState || GameState.LevelCleared == GameManager.Instance.currentState)
+        if (GameState.GameOver == GameManager.Instance.currentState ||
+            GameState.LevelCleared == GameManager.Instance.currentState)
         {
             AddScore(newScore);
         }
-        
+
     }
 
     public void AddScore(int score)
     {
         scoreData.scores.Add(score);
-        scoreData.scores.Sort((a,b) => b.CompareTo(a)); // 내림차순 정렬
+        scoreData.scores.Sort((a, b) => b.CompareTo(a)); // 내림차순 정렬
+
+        if (Scores.Count > 10) //리스트 10개 초과 시
+        {
+            Scores.Remove(Scores[10]); //가장 낮은 수 제거
+        }
 
         // 최고 점수 갱신
         if (score > scoreData.highScore)
