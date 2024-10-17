@@ -15,6 +15,7 @@ public class InGameScene : BaseScene
 		GameObject brickManager = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Brick/BrickManager"));
 
 		GameObject walls = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Walls"));
+		GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Background2"));
 	}
 
     private void Start()

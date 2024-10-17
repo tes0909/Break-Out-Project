@@ -27,6 +27,7 @@ public class SceneChange : MonoBehaviour//, ISceneChange
     {
         //페이드아웃
         float elapsed = 0f;
+        fadeImage.gameObject.SetActive(true);
         Color color = fadeImage.color;
 
         while (elapsed < fadeDuration)
@@ -49,6 +50,7 @@ public class SceneChange : MonoBehaviour//, ISceneChange
             fadeImage.color = color;
             yield return null;
         }
+        fadeImage.gameObject.SetActive(false);
     }
 
     //테스트
