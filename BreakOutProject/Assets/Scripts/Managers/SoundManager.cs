@@ -8,8 +8,8 @@ public class SoundManager : MonoBehaviour
     public static SoundManager SoundInstance { get; set; }
 
     [Header("Audio Sources")]
-    public AudioSource BGMSource; // 배경음용 AudioSource
-    public AudioSource SFXSource; // 효과음용 AudioSource
+     AudioSource BGMSource; // 배경음용 AudioSource
+     AudioSource SFXSource; // 효과음용 AudioSource
 
     public AudioClip[] BGM_Clips; // 각 씬에 맞는 배경음 클립 배열
     public AudioClip[] SFX_Clips; // 각 씬에 맞는 효과음 클립 배열
@@ -35,21 +35,6 @@ public class SoundManager : MonoBehaviour
         audioSources = GetComponentsInChildren<AudioSource>();
         BGMSource = audioSources[0];
         SFXSource = audioSources[1];
-    }
-    public void SetBGMVolume(float volume)
-    {
-        if (audioSources.Length > 0)
-        {
-            audioSources[0].volume = Mathf.Clamp01(volume); // BGM 볼륨 설정
-        }
-    }
-
-    public void SetSFXVolume(float volume)
-    {
-        if (audioSources.Length > 1)
-        {
-            audioSources[1].volume = Mathf.Clamp01(volume); // SFX 볼륨 설정
-        }
     }
     public void Start()
     {
@@ -80,6 +65,8 @@ public class SoundManager : MonoBehaviour
         {
             CurrentBGMIndex = index; // 선택된 인덱스로 변경
         }
+        SetBGMOnOff();//키고
+        SetBGMOnOff();//끄기
     }
     public void SetBGMOnOff()
     {
@@ -106,4 +93,5 @@ public class SoundManager : MonoBehaviour
             SFXOnOff = false;
         }
     }
+
 }
