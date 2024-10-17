@@ -51,6 +51,10 @@ public class Ball : MonoBehaviour
         {
             RotateArm();
         }
+        if (collision.collider.CompareTag("Brick"))
+        {
+            collision.gameObject.GetComponent<Brick>().GetDamage();
+        }
     }
     private void RotateArm()
     {
