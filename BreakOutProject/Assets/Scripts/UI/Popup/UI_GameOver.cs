@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,9 +15,9 @@ public class UI_GameOver : UI_Popup
 	{
 		_restartButton.onClick.AddListener(Restart);
 	}
-	public override void Init()
+	public override void Init(Action action)
 	{
-		base.Init();
+		base.Init(action);
 	}
 	public void Restart()
 	{

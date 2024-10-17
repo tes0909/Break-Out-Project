@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_StageLevelButton : UI_SubItem
 {
@@ -9,6 +10,7 @@ public class UI_StageLevelButton : UI_SubItem
 
 	private SceneChange _sceneChanger;
 	private difficultyLevel _difficultyLevel;
+	private bool _isclicked;
 	public void Awake()
 	{
 		_sceneChanger = GameManager.Instance.gameObject.GetComponent<SceneChange>();
@@ -16,8 +18,9 @@ public class UI_StageLevelButton : UI_SubItem
 
 	public void Start()
 	{
-		UI_ClickHandler click = gameObject.AddComponent<UI_ClickHandler>();
-		click.OnClickEvent += OpenStage;
+		_isclicked = false;
+		Button click = gameObject.GetComponent<Button>();
+		click.onClick.AddListener(OpenStage);
 	}
 
 	public override void Init(int index)
@@ -26,10 +29,13 @@ public class UI_StageLevelButton : UI_SubItem
 		_text.text = _difficultyLevel.ToString();
 	}
 
-	private void OpenStage(PointerEventData data)
+	private void OpenStage()
 	{
-		// TODO : GameManager등에 difficulty레벨을 설정해주는 함수
-		GameManager.Instance.SetDifficultyLevel(_difficultyLevel);
-		_sceneChanger.ChangeScene(SceneName.InGame);
+		if (!_isclicked)
+		{
+			_isclicked = true;
+			GameManager.Instance.SetDifficultyLevel(_difficultyLevel);
+			_sceneChanger.ChangeScene(SceneName.InGame);
+		}
 	}
 }

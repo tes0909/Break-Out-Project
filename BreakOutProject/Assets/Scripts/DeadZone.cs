@@ -9,6 +9,10 @@ public class DeadZone : MonoBehaviour
     {
         // 충돌한 모든 오브젝트를 파괴
         Destroy(other.gameObject);
+        if (other.gameObject.CompareTag("Ball"))
+        {
+            GameManager.Instance.GameOver();
+        }
         Debug.Log(other.gameObject.name + " has been destroyed.");
     }
 }

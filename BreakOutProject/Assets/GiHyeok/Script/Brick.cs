@@ -39,7 +39,12 @@ public class Brick : MonoBehaviour
         if (currentDurability == 1)
         {
             currentDurability--;
+            /*if (maxDurability == 2) 아이템 드랍
+            {
+                DropItem();
+            }*/
             gameObject.SetActive(false);
+            GameManager.Instance.Score += 1;
         }
         else if (currentDurability == 2)
         {
@@ -60,15 +65,15 @@ public class Brick : MonoBehaviour
                 break;
 
             case < 40:
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.multiBall);
                 break;
 
             case < 60:
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.longPaddle);
                 break;
 
             case < 80:
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.special);
                 break;
         }
         item.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);

@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UI_SelectScene : UI_Scene
 {
 	[SerializeField] private Transform _buttonLayout;
-	[SerializeField] private GameObject _rankingButton;
+	[SerializeField] private Button _rankingButton;
 	[SerializeField] private GameObject _menuButton;
 
 	public void Awake()
 	{
 		CreateLevelButtons();
-		UI_ClickHandler handler = _rankingButton.AddComponent<UI_ClickHandler>();
-		handler.OnClickEvent += OpenRankingUI;
+		_rankingButton.onClick.AddListener(OpenRankingUI);
 	}
 
 	public void CreateLevelButtons()
@@ -27,7 +27,7 @@ public class UI_SelectScene : UI_Scene
 		}
 	}
 
-	public void OpenRankingUI(PointerEventData data)
+	public void OpenRankingUI()
 	{
 		UIManager.Instance.OpenPopUpUI("RankingBoardUI");
 	}
