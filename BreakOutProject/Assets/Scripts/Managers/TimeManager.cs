@@ -16,7 +16,7 @@ public class TimeManager : MonoBehaviour
 
 	public void Start()
 	{
-        GameManager.Instance.OnGameStart += StartTimer;
+        Game.Instance.GameManager.OnGameStart += StartTimer;
 	}
 
 	//게임 시간 타이머
@@ -26,7 +26,7 @@ public class TimeManager : MonoBehaviour
         OnChangeTime(currentTime);
         if(currentTime <= 0)
         {
-            GameManager.Instance.GameOver();
+            Game.Instance.GameManager.GameOver();
         }
     }
 
@@ -37,7 +37,7 @@ public class TimeManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.Instance.currentState == GameState.playing)
+        if (Game.Instance.GameManager.currentState == GameState.playing)
         {
             Timer();
         }

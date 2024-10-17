@@ -44,7 +44,7 @@ public class Brick : MonoBehaviour
                 DropItem();
             }*/
             gameObject.SetActive(false);
-            GameManager.Instance.Score += 1;
+            Game.Instance.GameManager.Score += 1;
         }
         else if (currentDurability == 2)
         {

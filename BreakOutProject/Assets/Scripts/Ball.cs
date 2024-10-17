@@ -24,7 +24,7 @@ public class Ball : MonoBehaviour
         inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
         Rigidbody2D BallRigidbody = GetComponent<Rigidbody2D>();
         BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
-        GameManager.Instance.OnGameOver += DestroyThis;
+        Game.Instance.GameManager.OnGameOver += DestroyThis;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -69,7 +69,7 @@ public class Ball : MonoBehaviour
 
     public void DestroyThis()
     {
-        GameManager.Instance.OnGameOver -= DestroyThis;
+        Game.Instance.GameManager.OnGameOver -= DestroyThis;
         Destroy(gameObject);
     }
 }

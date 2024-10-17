@@ -20,7 +20,7 @@ public class InGameScene : BaseScene
 
     private void Start()
     {
-        GameManager.Instance.CountDownGameStart();
+        Game.Instance.GameManager.CountDownGameStart();
     }
 
     protected override void Close()

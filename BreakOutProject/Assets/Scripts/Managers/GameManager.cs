@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState
@@ -23,9 +24,6 @@ public interface IGameManager
 
 public class GameManager : MonoBehaviour, IGameManager
 {
-    public static GameManager Instance;
-
-
     public GameState currentState { get; private set; }
     public int DifficultyLevel { get; private set; }
 
@@ -76,20 +74,9 @@ public class GameManager : MonoBehaviour, IGameManager
 
     private void Awake()
     {
-        //ΩÃ±€≈Ê
-        Singleton();
-    }
-
-    private void Singleton()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
             DontDestroyOnLoad(gameObject);
-			currentState = GameState.paused;
-			OnGameOver += PauseGame;
-        }
-        else Destroy(gameObject);
+            currentState = GameState.paused;
+            OnGameOver += PauseGame;
     }
 
     public void StartGame()
@@ -126,9 +113,9 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         Application.Quit();
     }
-    
+
     public void SetDifficultyLevel(difficultyLevel difficultyLevel)
     {
         DifficultyLevel = (int)difficultyLevel;
-	}
+    }
 }
