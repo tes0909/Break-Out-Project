@@ -19,14 +19,13 @@ public class SceneChange : MonoBehaviour//, ISceneChange
 
     public void ChangeScene(SceneName sceneName)
     {
-		//StartCoroutine(Trasition(sceneName));
-		SceneManager.LoadScene(sceneName.ToString());
-		Debug.Log("코루틴실행");
+		StartCoroutine(Trasition(sceneName));
+		//SceneManager.LoadScene(sceneName.ToString());
     }
 
     private IEnumerator Trasition(SceneName sceneName)
     {
-        //페이드인
+        //페이드아웃
         float elapsed = 0f;
         Color color = fadeImage.color;
 
@@ -39,16 +38,6 @@ public class SceneChange : MonoBehaviour//, ISceneChange
         }
 
         SceneManager.LoadScene(sceneName.ToString());
-
-        ////페이드아웃
-        //elapsed = 0f;
-        //while(elapsed < fadeDuration)
-        //{
-        //    elapsed += Time.deltaTime;
-        //    color.a = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
-        //    fadeImage.color = color;
-        //    yield return null;
-        //}
 
     }
 
