@@ -7,16 +7,18 @@ using UnityEngine.EventSystems;
 public class UI_LobbyScene : UI_Scene
 {
 	[SerializeField] private GameObject _background;
-    [SerializeField] private SceneChange sceneChange; //인스펙터에서 할당
+
+	private SceneChange sceneChange;
     private void Awake()
 	{
+		sceneChange = GameObject.Find("@GameManager").GetComponent<SceneChange>();
 		UI_ClickHandler backgroundClick = _background.AddComponent<UI_ClickHandler>();
-		backgroundClick.OnClickEvent += LoadGameScene;
+		backgroundClick.OnClickEvent += LoadSelectScene;
 	}
 
-	private void LoadGameScene(PointerEventData data)
+	private void LoadSelectScene(PointerEventData data)
 	{
 		Debug.Log("clicked");
-        sceneChange.ChangeScene(SceneName.InGame);
+        sceneChange.ChangeScene(SceneName.SelectMode);
 	}
 }
