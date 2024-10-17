@@ -28,6 +28,6 @@ public class UI_DefaultPopup : UI_Popup
 
 	private void CloseThisUI()
 	{
-		UIManager.Instance.ClosePopUpUI("GameQuitUI");
+		Game.Instance.UiManager.ClosePopUpUI("GameQuitUI");
 	}
 }

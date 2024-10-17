@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public void CountDownGameStart()
     {
         Time.timeScale = 1f;
-        UIManager.Instance.OpenPopUpUI("CountdownUI");
+        Game.Instance.UiManager.OpenPopUpUI("CountdownUI");
         Invoke("StartGame", 3f);
     }
 
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public void GameOver()
     {
         currentState = GameState.GameOver;
-        UI_GameOver ui = UIManager.Instance.OpenPopUpUI("GameOverUI") as UI_GameOver;
+        UI_GameOver ui = Game.Instance.UiManager.OpenPopUpUI("GameOverUI") as UI_GameOver;
         ui.OnResponseEvent += CountDownGameStart;
         OnGameOver?.Invoke();
     }

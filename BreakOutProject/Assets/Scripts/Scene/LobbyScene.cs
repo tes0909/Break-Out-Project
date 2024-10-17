@@ -10,7 +10,7 @@ public class LobbyScene : BaseScene
 		//InitGameManager();
 		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/@GameManager"));
 		go.name = "@GameManager";
-		UIManager.Instance.OpenSceneUI("LobbySceneUI");
+		Game.Instance.UiManager.OpenSceneUI("LobbySceneUI");
 	}
 
 	private void InitGameManager()

@@ -8,7 +8,7 @@ public class InGameScene : BaseScene
 	protected override void Awake()
 	{
 		base.Awake();
-		UIManager.Instance.OpenSceneUI("GameSceneUI");
+		Game.Instance.UiManager.OpenSceneUI("GameSceneUI");
 		GameObject paddle = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Paddle"));
 		paddle.transform.position = _paddleInitPosition;
 

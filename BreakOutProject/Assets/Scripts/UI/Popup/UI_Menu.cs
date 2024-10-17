@@ -22,10 +22,10 @@ public class UI_Menu : UI_Popup
 	{
 		_background.onClick.AddListener(CloseThisPopUp);
 		_gameQuitButton.onClick.AddListener(OpenGameQuitUI);
-		_bgmSlider.onValueChanged.AddListener(SoundManager.SoundInstance.SetBGMVolume);
-		_sfxSlider.onValueChanged.AddListener(SoundManager.SoundInstance.SetSFXVolume);
-		_bgmOnImage.gameObject.SetActive(SoundManager.SoundInstance.BGMOnOff);
-		_sfxOnImage.gameObject.SetActive(SoundManager.SoundInstance.SFXOnOff);
+		_bgmSlider.onValueChanged.AddListener(Game.Instance.SoundManager.SetBGMVolume);
+		_sfxSlider.onValueChanged.AddListener(Game.Instance.SoundManager.SetSFXVolume);
+		_bgmOnImage.gameObject.SetActive(Game.Instance.SoundManager.BGMOnOff);
+		_sfxOnImage.gameObject.SetActive(Game.Instance.SoundManager.SFXOnOff);
 		_bgmOnOffButton.onClick.AddListener(BGMOnOff);
 		_sfxOnOffButton.onClick.AddListener(SFXOnOff);
 		CreateSoundSelectButton();
@@ -33,32 +33,32 @@ public class UI_Menu : UI_Popup
 
 	public void CreateSoundSelectButton()
 	{
-		int size = SoundManager.SoundInstance.BGM_Clips.Length;
+		int size = Game.Instance.SoundManager.BGM_Clips.Length;
 		for(int i = 0; i < size; i++)
 		{
-			UI_SubItem item = UIManager.Instance.CreateSubItemUI("SoundSelectButton", _bgmSelectLayout);
+			UI_SubItem item = Game.Instance.UiManager.CreateSubItemUI("SoundSelectButton", _bgmSelectLayout);
 			item.Init(i);
 		}
 	}
 	public void BGMOnOff()
 	{
-		SoundManager.SoundInstance.SetBGMOnOff();
-		_bgmOnImage.gameObject.SetActive(SoundManager.SoundInstance.BGMOnOff);
+		Game.Instance.SoundManager.SetBGMOnOff();
+		_bgmOnImage.gameObject.SetActive(Game.Instance.SoundManager.BGMOnOff);
 	}
 	public void SFXOnOff()
 	{
-		SoundManager.SoundInstance.SetSFXOnOff();
-		_sfxOnImage.gameObject.SetActive(SoundManager.SoundInstance.SFXOnOff);
+		Game.Instance.SoundManager.SetSFXOnOff();
+		_sfxOnImage.gameObject.SetActive(Game.Instance.SoundManager.SFXOnOff);
 
 	}
 
 	public void CloseThisPopUp()
 	{
-		UIManager.Instance.ClosePopUpUI("MenuUI");
+		Game.Instance.UiManager.ClosePopUpUI("MenuUI");
 	}
 	public void OpenGameQuitUI()
 	{
-		UIManager.Instance.OpenPopUpUI("GameQuitUI");
+		Game.Instance.UiManager.OpenPopUpUI("GameQuitUI");
 	}
 	public override void Close()
 	{

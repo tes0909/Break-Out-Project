@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Game:MonoBehaviour
@@ -9,8 +11,14 @@ public class Game:MonoBehaviour
     private SoundManager _soundManager;
 
     public GameManager GameManager => _gameManager;
-    public UIManager UiManager => _uiManager;
-    public SoundManager SoundManager => _soundManager;
+    public UIManager UiManager { get { Game.Instance.UiManager.Init(); return _uiManager; } }
+
+
+    public SoundManager SoundManager
+    {
+        get { return _soundManager; }
+        set { _soundManager = value; }
+    }
 
     private void Awake()
     {
@@ -20,8 +28,8 @@ public class Game:MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             _uiManager = new UIManager();
-            _soundManager = gameObject.AddComponent<SoundManager>();
-            _gameManager = gameObject.AddComponent<GameManager>();
+            _soundManager = new SoundManager();
+            _gameManager = new GameManager();
 
         }
         else

@@ -35,7 +35,7 @@ public class UI_GameScene : UI_Scene
 			_lifeIcons = new List<UI_LifeIcon>();
 			for (int i = 0; i < _lifeCount; i++)
 			{
-				_lifeIcons.Add((UI_LifeIcon)UIManager.Instance.CreateSubItemUI("LifeIcon", _lifeLayout));
+				_lifeIcons.Add((UI_LifeIcon)Game.Instance.UiManager.CreateSubItemUI("LifeIcon", _lifeLayout));
 			}
 			return;
 		}
