@@ -5,6 +5,6 @@ using UnityEngine;
 public class BallMoveSO : ScriptableObject
 {
     [Header("Move Info")]
-    public float defaultRotate;
-    public float defaultSpeed;
+    public float changeRotate;
+    public float changeSpeed;
 }

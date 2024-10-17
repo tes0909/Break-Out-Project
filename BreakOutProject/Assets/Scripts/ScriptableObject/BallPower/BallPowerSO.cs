@@ -4,5 +4,5 @@
 public class BallPowerSO : ScriptableObject
 {
     [Header("Power Info")]
-    public int defaultPower;
+    public int changePower;
 }

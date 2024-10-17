@@ -5,22 +5,19 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private Rigidbody2D BallRigidbody;// 공의 BallRigidbody.velocity
-    [SerializeField]
+    [SerializeField] private int InputDirection;//플레이어가 키를 입력했을 때
+    [SerializeField] private BallStat ballStat;
     private float BallSpeed; //공의 스피드
-    [SerializeField]
-    private int InputDirection;//플레이어가 키를 입력했을 때
-    [SerializeField]
     private float BallRotation;//공의 회전 값
+
     InputManager inputManager;
 
     protected BallStatHandler ballStats { get; private set; }
     void Awake()
     {
         ballStats = GetComponent<BallStatHandler>();
-        //BallSpeed = 10f;
-        BallSpeed = ballStats.CurrentStat.currentSpeed;
-        //BallRotation = 40f;
-        BallRotation = ballStats.CurrentStat.currentRotate;
+        BallSpeed = ballStats.CurrentStat.currentSpeed;//BallSpeed = 10f;
+        BallRotation = ballStats.CurrentStat.currentRotate;//BallRotation = 40f;
     }
 
     void Start()

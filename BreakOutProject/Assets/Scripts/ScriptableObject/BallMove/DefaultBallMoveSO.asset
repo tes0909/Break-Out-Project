@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f22a6777933fa449ba71e2e4cfad232, type: 3}
-  m_Name: DefaultBallPowerSO
+  m_Script: {fileID: 11500000, guid: 7e7eeefc0122b3a4481854ffa90243be, type: 3}
+  m_Name: DefaultBallMoveSO
   m_EditorClassIdentifier: 
-  defaultPower: 0
+  changeRotate: 40
+  changeSpeed: 10
