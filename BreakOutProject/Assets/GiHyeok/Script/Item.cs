@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    private int itemType { get; set; }
+    public int itemType { get; private set; }
     public enum itemTypeEnum : int
     {
         powerBall = 0,
