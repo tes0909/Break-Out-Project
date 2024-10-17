@@ -39,6 +39,16 @@ public class SceneChange : MonoBehaviour//, ISceneChange
 
         SceneManager.LoadScene(sceneName.ToString());
 
+        //페이드인
+        elapsed = 0f;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            fadeImage.color = color;
+            yield return null;
+        }
     }
 
     //테스트
