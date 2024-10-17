@@ -40,6 +40,7 @@ public class Brick : MonoBehaviour
         {
             currentDurability--;
             gameObject.SetActive(false);
+            GameManager.Instance.Score += 1;
         }
         else if (currentDurability == 2)
         {
