@@ -18,6 +18,8 @@ public class SoundManager : MonoBehaviour
     private int CurrentBGMIndex = 0; // 현재 재생 중인 배경음의 인덱스
     public bool BGMOnOff = true;
     public bool SFXOnOff = true;
+    public float BGMSize;
+    public float SFXSize;
 
     private void Awake()
     {
@@ -35,9 +37,12 @@ public class SoundManager : MonoBehaviour
         audioSources = GetComponentsInChildren<AudioSource>();
         BGMSource = audioSources[0];
         SFXSource = audioSources[1];
+        BGMSize = 1f;
+        SFXSize = 1f;
     }
     public void Start()
     {
+
         PlayBGM();
     }
 

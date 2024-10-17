@@ -1059,7 +1059,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109349261150226900}
   - component: {fileID: 8550291108484352781}
-  - component: {fileID: 422280781135830628}
+  - component: {fileID: 1704416900657226255}
   m_Layer: 0
   m_Name: SFX
   m_TagString: Untagged
@@ -1178,7 +1178,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &422280781135830628
+--- !u!114 &1704416900657226255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1187,10 +1187,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3044094370739254282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27cc012e7bcbc5a4aa1f317d8e908ebd, type: 3}
+  m_Script: {fileID: 11500000, guid: fa1b9b3efb2977d469892b40ee843f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioVolume: 1
+  AudioVolume: 0
 --- !u!1 &3123298778500541898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1854,9 +1854,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1208200508780910096}
-        m_TargetAssemblyTypeName: SoundVolume, Assembly-CSharp
-        m_MethodName: SlideChanged
+      - m_Target: {fileID: 5125880565224361996}
+        m_TargetAssemblyTypeName: BGMSoundVolume, Assembly-CSharp
+        m_MethodName: BGMSlideChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2092,9 +2092,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 422280781135830628}
-        m_TargetAssemblyTypeName: SoundVolume, Assembly-CSharp
-        m_MethodName: SlideChanged
+      - m_Target: {fileID: 1704416900657226255}
+        m_TargetAssemblyTypeName: SFXSoundVolume, Assembly-CSharp
+        m_MethodName: SFXSlideChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2505,6 +2505,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b3b325e1a5323ee4cb4e12e327529204, type: 3}
   BGMOnOff: 1
   SFXOnOff: 1
+  BGMSize: 0
+  SFXSize: 0
 --- !u!1 &6383401104716516091
 GameObject:
   m_ObjectHideFlags: 0
@@ -3124,7 +3126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 341064013277712663}
   - component: {fileID: 8293599480653657555}
-  - component: {fileID: 1208200508780910096}
+  - component: {fileID: 5125880565224361996}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -3243,7 +3245,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1208200508780910096
+--- !u!114 &5125880565224361996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3252,10 +3254,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7256810494812188673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27cc012e7bcbc5a4aa1f317d8e908ebd, type: 3}
+  m_Script: {fileID: 11500000, guid: 233563322b6d7254384027b8a1cce5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioVolume: 1
+  AudioVolume: 0
 --- !u!1 &7396614224019687661
 GameObject:
   m_ObjectHideFlags: 0
