@@ -18,7 +18,11 @@ public class UI_GameScene : UI_Scene
 		CreateLife();
 		GameManager.Instance.OnLifeChanged += UpdateLife;
 		GameManager.Instance.OnScoreChanged += NowScoreText;
+
+		if(ScoreboardManager.Instance.Scores.Count > 0 )
+			_highScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
 	}
+
 	private void CreateLife()
 	{
 		//Todo gamemanager에서 최대 hp가져오기
@@ -38,23 +42,21 @@ public class UI_GameScene : UI_Scene
 		}
 
 	}
+
 	public void UpdateTimerText(float time)
 	{
 		_timerText.text = time.ToString("D2");
 	}
+
 	public void NowScoreText(int score)
 	{
 		_nowScoreText.text = score.ToString();
 	}
-	public void HighScoreText(int highscore)
-	{
-		_highScoreText.text = highscore.ToString();
-	}
+
 	public void UpdateLife(int life)
 	{
 		_lifeIcons[_lifeCount].gameObject.SetActive(false);
 		_lifeCount = life;
-
 	}
 
 }
