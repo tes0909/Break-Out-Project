@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance { get; private set; }
+    public static SoundManager SoundInstance { get; private set; }
 
     [Header("Audio Sources")]
     private AudioSource BGMSource; // 배경음용 AudioSource
@@ -15,8 +15,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] SFX_Clips; // 각 씬에 맞는 효과음 클립 배열
 
     private int CurrentBGMIndex = 0; // 현재 재생 중인 배경음의 인덱스
-    private bool BGMOnOff = false;
-
+    private bool BGMOnOff = true;
+    private bool SFXOnOff = true;
     [Range(0f, 1f)]
     public float BGMVolume = 1f; // 기본 볼륨 설정
     [Range(0f, 1f)]
@@ -24,24 +24,26 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (SoundInstance != null && SoundInstance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        Instance = this;
+        SoundInstance = this;
         DontDestroyOnLoad(gameObject);
 
         // 자식 오브젝트에서 AudioSource 가져오기
         AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
         BGMSource = audioSources[0];
         SFXSource = audioSources[1];
-        BGMOnOff = true;
     }
 
     public void Start()
     {
+        BGMVolume = PlayerPrefs.GetFloat("BGMVolume", 1f); // 저장된 BGM 볼륨 가져오기
+        SFXVolume = PlayerPrefs.GetFloat("SFXVolume", 1f); // 저장된 SFX 볼륨 가져오기
+
         PlayBGM();
         PlaySFX(SFX_Clips[2]);
         PlaySFX(SFX_Clips[3]);
@@ -54,7 +56,6 @@ public class SoundManager : MonoBehaviour
 
         if (BGMSource.isPlaying)
             BGMSource.Stop();
-
         BGMSource.clip = BGM_Clips[CurrentBGMIndex];
         BGMSource.Play();
     }
@@ -87,21 +88,33 @@ public class SoundManager : MonoBehaviour
     }
     public void PlaySFXOnOff()
     {
-        if (BGMOnOff == false)
+        if (SFXOnOff == false)
         {
-            SFXSource.Stop();
-            SFXVolume = 0.5f; // BGM 켜기
-            PlayBGM();
+            SFXOnOff = true;
         }
-        else if (BGMOnOff == true)
+        else if (SFXOnOff == true)
         {
-            SFXSource.Stop();
-            SFXVolume = 0f;
+            SFXOnOff = false;
         }
     }
     public void PlaySFX(AudioClip clip)
     {
-        SFXSource.volume = SFXVolume;
+        if (SFXOnOff)
+        {
         SFXSource.PlayOneShot(clip); // 효과음 재생
+        }
+    }
+    public void SlideBGMChanged(float value)
+    {
+        BGMVolume = value; // BGM 볼륨 설정
+        PlayerPrefs.SetFloat("BGMVolume", BGMVolume); // 볼륨 저장
+        
+    }
+
+    public void SlideSFXChanged(float value)
+    {
+        SFXVolume = value; // SFX 볼륨 설정
+        PlayerPrefs.SetFloat("SFXVolume", SFXVolume); // 볼륨 저장
+
     }
 }

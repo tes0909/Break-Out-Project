@@ -42,6 +42,8 @@ public class Ball : MonoBehaviour
     //}
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        SoundManager.SoundInstance.PlaySFX(SoundManager.SoundInstance.SFX_Clips[1]);
         BallRigidbody = GetComponent<Rigidbody2D>();
         Vector2 bounceDirection = collision.contacts[0].normal;
         BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
