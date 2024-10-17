@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8602735954285949930}
   - component: {fileID: 4099139808515941208}
   - component: {fileID: 7222456396262002717}
+  - component: {fileID: 753637002535563646}
   m_Layer: 5
   m_Name: SelectSceneUI
   m_TagString: Untagged
@@ -105,6 +106,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &753637002535563646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291909408281972222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b7642887d9d224c81fb2db7de1779b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonLayout: {fileID: 2192612589783147360}
+  _rankingButton: {fileID: 4822243882278553902}
+  _menuButton: {fileID: 7799489309474224083}
 --- !u!1 &2323080474452738462
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,5 +622,10 @@ PrefabInstance:
 --- !u!224 &4228324900195799896 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3557693220876503800, guid: 62a0b2da04f41d046a38514446a5a8d0, type: 3}
+  m_PrefabInstance: {fileID: 860592400852375968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7799489309474224083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7479399323015196275, guid: 62a0b2da04f41d046a38514446a5a8d0, type: 3}
   m_PrefabInstance: {fileID: 860592400852375968}
   m_PrefabAsset: {fileID: 0}
