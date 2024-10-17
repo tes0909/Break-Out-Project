@@ -29,6 +29,7 @@ public class UI_StageLevelButton : UI_SubItem
 	private void OpenStage(PointerEventData data)
 	{
 		// TODO : GameManager등에 difficulty레벨을 설정해주는 함수
+		GameManager.Instance.SetDifficultyLevel(_difficultyLevel);
 		_sceneChanger.ChangeScene(SceneName.InGame);
 	}
 }

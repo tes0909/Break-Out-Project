@@ -14,13 +14,14 @@ public class SceneChange : MonoBehaviour//, ISceneChange
 {
     IGameManager gameManaer;
 
-    [SerializeField]private Image fadeImage;
+    [SerializeField] private Image fadeImage;
     private float fadeDuration = 1.3f;
 
     public void ChangeScene(SceneName sceneName)
     {
-        StartCoroutine(Trasition(sceneName));
-        Debug.Log("内风凭角青");
+		//StartCoroutine(Trasition(sceneName));
+		SceneManager.LoadScene(sceneName.ToString());
+		Debug.Log("内风凭角青");
     }
 
     private IEnumerator Trasition(SceneName sceneName)

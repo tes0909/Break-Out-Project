@@ -8,11 +8,10 @@ public class UI_CountDown : UI_Popup
 	[SerializeField] private TMP_Text text;
 
 	private const int START_DELAY =  3;
-	private WaitForSeconds waittime = new WaitForSeconds(1f);
+	private WaitForSecondsRealtime waittime = new WaitForSecondsRealtime(1f);
 
-	public override void Init()
+	private void Start()
 	{
-		base.Init();
 		StartCoroutine(StartCountdown());
 	}
 	private IEnumerator StartCountdown()
@@ -21,7 +20,7 @@ public class UI_CountDown : UI_Popup
 		while (remainTime > 0)
 		{
 			text.text = remainTime.ToString();
-			yield return waittime;
+			yield return new WaitForSecondsRealtime(1f);
 			remainTime--;
 		}
 		UIManager.Instance.ClosePopUpUI("CountdownUI");

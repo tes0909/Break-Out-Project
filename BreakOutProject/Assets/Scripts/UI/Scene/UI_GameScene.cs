@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UI_GameScene : UI_Scene
@@ -19,7 +20,7 @@ public class UI_GameScene : UI_Scene
 		GameManager.Instance.OnLifeChanged += UpdateLife;
 		GameManager.Instance.OnScoreChanged += NowScoreText;
 
-		if(ScoreboardManager.Instance.Scores.Count > 0 )
+		if(ScoreboardManager.Instance.Scores.Count > 0 && ScoreboardManager.Instance.Scores !=null)
 			_highScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
 	}
 

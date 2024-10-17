@@ -16,6 +16,7 @@ public class LobbyScene : BaseScene
 		GameObject gameManager = new GameObject("@GameManager");
 		gameManager.AddComponent<GameManager>();
 		gameManager.AddComponent<SceneChange>();
+		gameManager.AddComponent<ScoreboardManager>();
 	}
 
 	protected override void Close()

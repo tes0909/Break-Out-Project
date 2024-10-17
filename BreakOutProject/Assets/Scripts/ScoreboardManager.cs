@@ -10,7 +10,7 @@ public class ScoreData
     public List<int> scores = new List<int>();
 }
 
-public class ScoreboardManager
+public class ScoreboardManager : MonoBehaviour
 {
     private const string ScoreFileName = "Scoreboard.json";
     private ScoreData scoreData = new ScoreData();
@@ -22,17 +22,20 @@ public class ScoreboardManager
 
     private void Awake()
     {
-        // ΩÃ±€≈Ê
-        if (Instance == null)
-        {
-            Instance = this;
+		if (Instance == null)
+		{
+			Instance = this;
+			DontDestroyOnLoad(gameObject);
+			LoadScores();
 
-            LoadScores();
+			GameManager.Instance.OnScoreChanged += UpdateHighScore;
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
 
-            GameManager.Instance.OnScoreChanged += UpdateHighScore;
-        }
-
-    }
+	}
 
     private void UpdateHighScore(int newScore)
     {

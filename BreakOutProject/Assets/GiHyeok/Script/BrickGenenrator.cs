@@ -26,8 +26,13 @@ public class BrickGenenrator : MonoBehaviour
     public BrickPool brickPool;
 
     private int[,] brickPattern;
-    // Start is called before the first frame update
-    public void GenenrateBrick(int difficulty)
+	// Start is called before the first frame update
+	private void Awake()
+	{
+        GameManager.Instance.OnGameStart += GenenrateBrick;
+	}
+
+	public void GenenrateBrick(int difficulty)
     {
         difficultyLevel currentDifficulty = (difficultyLevel)difficulty;
         switch (currentDifficulty)

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour, IGameManager
 
 
     public GameState currentState { get; private set; }
+    public int DifficultyLevel { get; private set; }
 
     private int score; //점수
     private int life = 3; //임의로 목숨 3개
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public event Action<int> OnLifeChanged;
     public event Action OnGameOver;
     public event Action OnGameClear;
+    public event Action<int> OnGameStart;
 
     private InGameScene inGameScene;
 
@@ -93,13 +95,15 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         currentState = GameState.playing;
         Time.timeScale = 1f;
+        OnGameStart?.Invoke(DifficultyLevel);
+        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
 
     }
 
     public void CountDownGameStart()
     {
-        Time.timeScale = 0;
-        UIManager.Instance.OpenPopUpUI("Countdown");
+        Time.timeScale = 1f;
+        UIManager.Instance.OpenPopUpUI("CountdownUI");
         Invoke("StartGame", 3f);
     }
 
@@ -117,9 +121,13 @@ public class GameManager : MonoBehaviour, IGameManager
         OnGameOver?.Invoke();
     }
 
-    //게임종료
     public void QuitGame()
     {
         Application.Quit();
     }
+    
+    public void SetDifficultyLevel(difficultyLevel difficultyLevel)
+    {
+        DifficultyLevel = (int)difficultyLevel;
+	}
 }
