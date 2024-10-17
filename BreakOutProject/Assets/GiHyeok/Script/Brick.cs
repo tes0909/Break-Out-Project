@@ -22,6 +22,7 @@ public class Brick : MonoBehaviour
     public void SetDurability(int durability)
     {
         maxDurability = durability;
+        currentDurability = durability;
         switch (durability)
         {
             case 1:
