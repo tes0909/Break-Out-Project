@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    public GameObject objectToDestroy; // Inspector에서 지정할 오브젝트
 
     private void OnTriggerEnter2D(Collider2D other)
     {
