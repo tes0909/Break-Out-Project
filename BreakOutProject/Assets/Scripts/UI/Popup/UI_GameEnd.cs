@@ -21,10 +21,5 @@ public class UI_GameEnd : UI_DefaultPopup
 	{
 		base.Reject();
 		Game.Instance.gameObject.GetComponent<SceneChange>().ChangeScene(SceneName.SelectMode);
-		Debug.Log("À¸¿¨ ");
-	}
-	public override void Close()
-	{
-		base.Close();
 	}
 }
