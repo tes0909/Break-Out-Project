@@ -26,12 +26,20 @@ public class Ball : MonoBehaviour
     {
         inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
         BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
+        Game.Instance.GameManager.OnGameOver += DestroyThis;
     }
+<<<<<<< HEAD
  
     private void OnCollisionEnter2D(Collision2D collision)
     {     
 
         SoundManager.SoundInstance.PlaySFX(SoundManager.SoundInstance.SFX_Clips[1]);
+=======
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Game.Instance.SoundManager.PlaySFX(Game.Instance.SoundManager.SFX_Clips[1]); ResourceManager추가후 추가
+        BallRigidbody = GetComponent<Rigidbody2D>();
+>>>>>>> Dev
         Vector2 bounceDirection = collision.contacts[0].normal;
         
         BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
@@ -78,6 +86,7 @@ public class Ball : MonoBehaviour
         Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) *direction; // 위쪽 방향에 회전값을 적용
         BallRigidbody.velocity = bounceDirection * BallSpeed; // 회전 방향으로 속도 설정
     }
+<<<<<<< HEAD
     private void AddBallForce(Vector2 direction, float BallSpeed)//힘을 더해줍니다.
     {
         float BallRotationEX = BallRotation;
@@ -87,5 +96,12 @@ public class Ball : MonoBehaviour
         // 충돌 시 튕기는 방향을 수정합니다.
         Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) * direction; // 위쪽 방향에 회전값을 적용
         BallRigidbody.velocity += bounceDirection * BallSpeed; // 회전 방향으로 속도 설정
+=======
+
+    public void DestroyThis()
+    {
+        Game.Instance.GameManager.OnGameOver -= DestroyThis;
+        Destroy(gameObject);
+>>>>>>> Dev
     }
 }
