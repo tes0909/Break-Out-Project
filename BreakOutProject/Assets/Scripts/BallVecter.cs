@@ -13,7 +13,7 @@ public class BounceBall : MonoBehaviour
     {
         ballStats = GetComponent<BallStatHandler>();
         inputController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputController>();
-        direction = new Vector2(Random.Range(-1,2), 1).normalized; // 초기 방향
+        direction = new Vector2(Random.Range(-1f,2f), 1).normalized; // 초기 방향
         Game.Instance.GameManager.OnGameOver += DestroyThis;
     }
 
@@ -31,7 +31,7 @@ public class BounceBall : MonoBehaviour
         }
         else if(collision.collider.CompareTag("TopWall"))
         {
-            rand = Random.Range(-1, 2);
+            rand = Random.Range(-1f, 2f);
             direction.x *= rand;
             direction = new Vector2(rand, -1).normalized;
         }
@@ -39,7 +39,7 @@ public class BounceBall : MonoBehaviour
         {
             if(inputController.moveInput ==0)
             {
-                rand = Random.Range(-1, 2);
+                rand = Random.Range(-1f, 2f);
             }
             else
             {
