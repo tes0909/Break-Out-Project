@@ -45,32 +45,4 @@ public class InputManager : MonoBehaviour
 
         transform.position = position; 
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "item")
-        {
-            int itemType=collision.transform.GetComponent<Item>().itemType;
-            switch (itemType) 
-            {
-                case (int)Item.itemTypeEnum.powerBall:
-                    //공이 장애물 관통?
-                    break;
-
-                case (int)Item.itemTypeEnum.multiBall:
-                    //공 여러개로 분열
-                    break;
-
-                case (int)Item.itemTypeEnum.longPaddle:
-                    //패들 길이 늘어남
-                    break;
-
-                case (int)Item.itemTypeEnum.special:
-                    //미정
-                    break;
-            }
-
-        }
-        collision.gameObject.SetActive(false);
-    }
 }

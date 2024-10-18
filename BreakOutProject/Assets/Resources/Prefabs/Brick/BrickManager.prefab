@@ -51,7 +51,7 @@ MonoBehaviour:
   brickSizeY: 0.8
   brickIntervalX: 0.2
   brickIntervalY: 0.2
-  brickPool: {fileID: 8445728438973504739}
+  poolManager: {fileID: 8445728438973504739}
 --- !u!114 &8445728438973504739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,3 +66,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brickPrefab: {fileID: 5614627413939252316, guid: 2b796d092d1b7c24ab59a897568409c6, type: 3}
   maxbrick: 30
+  itemPrefab: {fileID: 0}
+  maxItem: 0
