@@ -16,7 +16,9 @@ public class UI_GameScene : UI_Scene
 
 	private void Awake()
 	{
-		CreateLife();
+		ScoreboardManager.Instance.OnHighScoreUpdated += UpdateHighScoreText;
+
+        CreateLife();
 		Game.Instance.GameManager.OnLifeChanged += UpdateLife;
 		Game.Instance.GameManager.OnScoreChanged += NowScoreText;
 
@@ -24,6 +26,11 @@ public class UI_GameScene : UI_Scene
 			_highScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
 
 		Game.Instance.gameObject.GetComponent<TimeManager>().OnChangeTime += UpdateTimerText;
+	}
+
+	private void UpdateHighScoreText(int newHighScore)
+	{
+		_highScoreText.text = newHighScore.ToString();
 	}
 
 	private void CreateLife()
