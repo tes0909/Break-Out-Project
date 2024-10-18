@@ -11,18 +11,18 @@ public class Ball : MonoBehaviour
     private int InputDirection;//플레이어가 키를 입력했을 때
     [SerializeField]
     private float BallRotation;//공의 회전 값
-    InputManager inputManager;
+
+    PlayerInputController inputController;
     void Awake()
     {
         BallSpeed = 10f;
         BallRotation = 40f;
-
     }
 
     void Start()
     {
-        inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
-        Rigidbody2D BallRigidbody = GetComponent<Rigidbody2D>();
+        inputController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputController>();
+        BallRigidbody = GetComponent<Rigidbody2D>();
         BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
     }
     //private void FixedUpdate()
@@ -43,7 +43,7 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         SoundManager.SoundInstance.PlaySFX(SoundManager.SoundInstance.SFX_Clips[1]);
-        BallRigidbody = GetComponent<Rigidbody2D>();
+
         Vector2 bounceDirection = collision.contacts[0].normal;
         BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
 
@@ -59,7 +59,7 @@ public class Ball : MonoBehaviour
     private void RotateArm()
     {
         float BallRotationEX = BallRotation;
-        switch (inputManager.horizontal)
+        switch (inputController.moveInput)
         {
             case -1f:
                 BallRotationEX = BallRotation;//플레이어 핸들러가 왼쪽으로 이동할 때
