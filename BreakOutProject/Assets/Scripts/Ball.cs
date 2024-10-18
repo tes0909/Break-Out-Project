@@ -35,30 +35,40 @@ public class Ball : MonoBehaviour
 
         Vector2 bounceDirection = collision.contacts[0].normal;
         
-        BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
+        //BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
 
 
         if (collision.collider.CompareTag("Player"))//?÷???? ???????
         {
-        ForceTheBall(Vector2.up, BallSpeed, BallRotation);
+        ForceTheBall(Vector2.up, BallSpeed, BallRotation,0);
         }
-        if (collision.collider.CompareTag("Brick"))
+        else if (collision.collider.CompareTag("Brick"))
         {
             collision.gameObject.GetComponent<Brick>().GetDamage();
         }
-        if(collision.collider.CompareTag("SideWall"))
+        else if(collision.collider.CompareTag("SideWall"))
         {
-            AddBallForce(Vector2.up, BallSpeed/2);
+        //AddBallForce(Vector2.down, BallSpeed/2);
         }
-        if (BallRigidbody.velocity.y == 0 && BallRigidbody.velocity.x == 0)
+        else if (collision.collider.CompareTag("TopWall"))
         {
-            BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
+            ForceTheBall(Vector2.down, BallSpeed, BallRotation/2,1);
+        }
+        else if (BallRigidbody.velocity.y == 0 && BallRigidbody.velocity.x == 0)
+        {
+            BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
         }
     }
-    private void ForceTheBall(Vector2 direction,float BallSpeed, float BallRotation)
+
+    private void ForceTheBall(Vector2 direction,float BallSpeed, float BallRotation,int type)//0은 유저가 움직임 1은 랜덤방향
     {
+        //inputController.moveInput
         direction.Normalize();
         float BallRotationEX = BallRotation;
+        if(type==1)
+        {
+            inputController.moveInput = 0f;
+        }
         switch (inputController.moveInput)
         {
             case -1f:
@@ -79,6 +89,7 @@ public class Ball : MonoBehaviour
         Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) *direction; // ???? ???? ??????? ????
         BallRigidbody.velocity = bounceDirection * BallSpeed; // ??? ???????? ??? ????
     }
+
     private void AddBallForce(Vector2 direction, float BallSpeed)//???? ????????.
     {
         float BallRotationEX = BallRotation;
@@ -89,7 +100,7 @@ public class Ball : MonoBehaviour
         Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) * direction; // ???? ???? ??????? ????
         BallRigidbody.velocity += bounceDirection * BallSpeed; // ??? ???????? ??? ????
     }
-
+   
     public void DestroyThis()
     {
         Game.Instance.GameManager.OnGameOver -= DestroyThis;

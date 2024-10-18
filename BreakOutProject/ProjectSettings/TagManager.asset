@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ball
   - SideWall
+  - TopWall
+  - Brick
+  - Wall
   layers:
   - Default
   - TransparentFX
