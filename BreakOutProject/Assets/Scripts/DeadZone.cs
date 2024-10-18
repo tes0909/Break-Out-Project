@@ -11,7 +11,7 @@ public class DeadZone : MonoBehaviour
         Destroy(other.gameObject);
         if (other.gameObject.CompareTag("Ball"))
         {
-            GameManager.Instance.GameOver();
+            Game.Instance.GameManager.GameOver();
         }
         Debug.Log(other.gameObject.name + " has been destroyed.");
     }

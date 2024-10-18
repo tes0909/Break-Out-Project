@@ -19,7 +19,7 @@ public class UI_SoundSelectButton : UI_SubItem
 	}
 	public void SelectBGM()
 	{
-		SoundManager.SoundInstance.SelectBGM(_index);
-		SoundManager.SoundInstance.PlayBGM();
+		Game.Instance.SoundManager.SelectBGM(_index);
+		Game.Instance.SoundManager.PlayBGM();
 	}
 }

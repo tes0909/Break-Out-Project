@@ -10,15 +10,7 @@ public class LobbyScene : BaseScene
 		//InitGameManager();
 		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/@GameManager"));
 		go.name = "@GameManager";
-		UIManager.Instance.OpenSceneUI("LobbySceneUI");
-	}
-
-	private void InitGameManager()
-	{
-		GameObject gameManager = new GameObject("@GameManager");
-		gameManager.AddComponent<GameManager>();
-		gameManager.AddComponent<SceneChange>();
-		gameManager.AddComponent<ScoreboardManager>();
+		Game.Instance.UiManager.OpenSceneUI("LobbySceneUI");
 	}
 
 	protected override void Close()

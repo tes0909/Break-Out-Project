@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState
@@ -21,11 +22,8 @@ public interface IGameManager
     void QuitGame();
 }
 
-public class GameManager : MonoBehaviour, IGameManager
+public class GameManager: IGameManager
 {
-    public static GameManager Instance;
-
-
     public GameState currentState { get; private set; }
     public int DifficultyLevel { get; private set; }
 
@@ -76,26 +74,15 @@ public class GameManager : MonoBehaviour, IGameManager
 
     private void Awake()
     {
-        //ΩÃ±€≈Ê
-        Singleton();
-    }
-
-    private void Singleton()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-			currentState = GameState.paused;
-			OnGameOver += PauseGame;
-        }
-        else Destroy(gameObject);
+            currentState = GameState.paused;
+            OnGameOver += PauseGame;
     }
 
     public void StartGame()
     {
         currentState = GameState.playing;
         Time.timeScale = 1f;
+        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(5, GameOver);
         OnGameStart?.Invoke(DifficultyLevel);
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
 
@@ -104,8 +91,8 @@ public class GameManager : MonoBehaviour, IGameManager
     public void CountDownGameStart()
     {
         Time.timeScale = 1f;
-        UIManager.Instance.OpenPopUpUI("CountdownUI");
-        Invoke("StartGame", 3f);
+        Game.Instance.UiManager.OpenPopUpUI("CountdownUI");
+        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(3, StartGame);
     }
 
     public void PauseGame()
@@ -117,7 +104,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public void GameOver()
     {
         currentState = GameState.GameOver;
-        UI_GameOver ui = UIManager.Instance.OpenPopUpUI("GameOverUI") as UI_GameOver;
+        UI_GameOver ui = Game.Instance.UiManager.OpenPopUpUI("GameOverUI") as UI_GameOver;
         ui.OnResponseEvent += CountDownGameStart;
         OnGameOver?.Invoke();
     }
@@ -126,9 +113,9 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         Application.Quit();
     }
-    
+
     public void SetDifficultyLevel(difficultyLevel difficultyLevel)
     {
         DifficultyLevel = (int)difficultyLevel;
-	}
+    }
 }

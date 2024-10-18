@@ -4,22 +4,15 @@ using UnityEngine;
 
 public class UIManager
 {
-	#region singleton
-	private static UIManager _instance;
-
-	public static UIManager Instance { get { Init(); return _instance; } }
-
-	public static void Init()
+	public void Init()
 	{
 
-		if (_instance == null)
+		if (Game.Instance.UiManager == null)
 		{
-			_instance = new UIManager();
-			_instance._cache = new Dictionary<string, GameObject>();
-			_instance._popups = new Dictionary<string, UI_Popup>();
+            Game.Instance.UiManager._cache = new Dictionary<string, GameObject>();
+            Game.Instance.UiManager._popups = new Dictionary<string, UI_Popup>();
 		}
 	}
-	#endregion
 
 	private Dictionary<string, UI_Popup> _popups;
 	private Dictionary<string, GameObject> _cache;

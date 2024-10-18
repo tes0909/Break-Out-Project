@@ -28,7 +28,7 @@ public class ScoreboardManager : MonoBehaviour
 			DontDestroyOnLoad(gameObject);
 			LoadScores();
 
-			GameManager.Instance.OnScoreChanged += UpdateHighScore;
+			Game.Instance.GameManager.OnScoreChanged += UpdateHighScore;
 		}
 		else
 		{
@@ -43,8 +43,8 @@ public class ScoreboardManager : MonoBehaviour
         {
             scoreData.highScore = newScore;
         }
-        if (GameState.GameOver == GameManager.Instance.currentState ||
-            GameState.LevelCleared == GameManager.Instance.currentState)
+        if (GameState.GameOver == Game.Instance.GameManager.currentState ||
+            GameState.LevelCleared == Game.Instance.GameManager.currentState)
         {
             AddScore(newScore);
         }

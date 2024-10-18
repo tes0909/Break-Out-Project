@@ -13,7 +13,7 @@ public class UI_StageLevelButton : UI_SubItem
 	private bool _isclicked;
 	public void Awake()
 	{
-		_sceneChanger = GameManager.Instance.gameObject.GetComponent<SceneChange>();
+		_sceneChanger = Game.Instance.gameObject.GetComponent<SceneChange>();
 	}
 
 	public void Start()
@@ -34,7 +34,7 @@ public class UI_StageLevelButton : UI_SubItem
 		if (!_isclicked)
 		{
 			_isclicked = true;
-			GameManager.Instance.SetDifficultyLevel(_difficultyLevel);
+			Game.Instance.GameManager.SetDifficultyLevel(_difficultyLevel);
 			_sceneChanger.ChangeScene(SceneName.InGame);
 		}
 	}

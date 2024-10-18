@@ -29,7 +29,7 @@ public class BrickGenenrator : MonoBehaviour
 	// Start is called before the first frame update
 	private void Awake()
 	{
-        GameManager.Instance.OnGameStart += GenenrateBrick;
+        Game.Instance.GameManager.OnGameStart += GenenrateBrick;
 	}
 
 	public void GenenrateBrick(int difficulty)

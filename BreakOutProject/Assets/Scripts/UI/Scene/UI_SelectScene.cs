@@ -22,13 +22,13 @@ public class UI_SelectScene : UI_Scene
 	{
 		for(int i = 0; i < (int)difficultyLevel.end; i++)
 		{
-			UI_StageLevelButton button = UIManager.Instance.CreateSubItemUI("StageLevelButton", _buttonLayout) as UI_StageLevelButton;
+			UI_StageLevelButton button = Game.Instance.UiManager.CreateSubItemUI("StageLevelButton", _buttonLayout) as UI_StageLevelButton;
 			button.Init(i);
 		}
 	}
 
 	public void OpenRankingUI()
 	{
-		UIManager.Instance.OpenPopUpUI("RankingBoardUI");
+		Game.Instance.UiManager.OpenPopUpUI("RankingBoardUI");
 	}
 }

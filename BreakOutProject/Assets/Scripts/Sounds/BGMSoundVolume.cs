@@ -11,7 +11,7 @@ public class BGMSoundVolume : MonoBehaviour, IVolume
     {
         AudioVolume = PlayerPrefs.GetFloat("BGMVolume", 1f); // 저장된 볼륨 가져오기
         audioSource = GetComponent<AudioSource>();
-        if (SoundManager.SoundInstance != null)
+        if (Game.Instance.SoundManager != null)
         {
 			UpdateSoundVolume(AudioVolume);
         }

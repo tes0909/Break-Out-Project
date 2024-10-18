@@ -24,11 +24,11 @@ public class Ball : MonoBehaviour
         inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
         Rigidbody2D BallRigidbody = GetComponent<Rigidbody2D>();
         BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
-        GameManager.Instance.OnGameOver += DestroyThis;
+        Game.Instance.GameManager.OnGameOver += DestroyThis;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SoundManager.SoundInstance.PlaySFX(SoundManager.SoundInstance.SFX_Clips[1]);
+        Game.Instance.SoundManager.PlaySFX(Game.Instance.SoundManager.SFX_Clips[1]);
         BallRigidbody = GetComponent<Rigidbody2D>();
         Vector2 bounceDirection = collision.contacts[0].normal;
         BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
@@ -69,7 +69,7 @@ public class Ball : MonoBehaviour
 
     public void DestroyThis()
     {
-        GameManager.Instance.OnGameOver -= DestroyThis;
+        Game.Instance.GameManager.OnGameOver -= DestroyThis;
         Destroy(gameObject);
     }
 }
