@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FastBallMoveSO
   m_EditorClassIdentifier: 
   changeRotate: 40
-  changeSpeed: 20
+  changeSpeed: 12
