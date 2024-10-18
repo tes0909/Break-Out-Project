@@ -6,7 +6,8 @@ public class Movement : MonoBehaviour
 {
     private PlayerController controller;
     private Rigidbody2D Rigidbody;
-    private Vector2 movementDirection = Vector2.zero;
+    private float movementDirection;
+    [SerializeField] private float speed;
 
     private void Awake()
     {
@@ -19,7 +20,7 @@ public class Movement : MonoBehaviour
         controller.OnMoveEvent += Move;
     }
 
-    private void Move(Vector2 direction)
+    private void Move(float direction)
     {
         movementDirection = direction;
     }
@@ -29,9 +30,9 @@ public class Movement : MonoBehaviour
         ApplyMovement(movementDirection);
     }
 
-    private void ApplyMovement(Vector2 direction)
+    private void ApplyMovement(float direction)
     {
         direction = direction * 5;
-        Rigidbody.velocity = direction;
+        Rigidbody.velocity = new Vector2(direction * speed, 0);
     }
 }
