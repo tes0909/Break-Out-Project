@@ -26,6 +26,6 @@ public class UI_RankingBoard : UI_Popup
 
 	private void CloseThisPopUP()
 	{
-		Game.Instance.UiManager.ClosePopUpUI("RankingBoardUI");
+		Game.Instance.UiManager.ClosePopUpUI();
 	}
 }

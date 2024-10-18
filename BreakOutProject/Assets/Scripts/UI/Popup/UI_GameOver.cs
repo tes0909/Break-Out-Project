@@ -5,24 +5,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_GameOver : UI_Popup
+public class UI_GameOver : UI_DefaultPopup
 {
 	[SerializeField] private TMP_Text _nowScroeText;
 	[SerializeField] private TMP_Text _HighScoreText;
-	[SerializeField] private Button _restartButton;
 
-	public void Start()
+	public override void Awake()
 	{
-		_restartButton.onClick.AddListener(Restart);
+		base.Awake();
+		_nowScroeText.text = Game.Instance.GameManager.Score.ToString();
+		_HighScoreText.text = ScoreboardManager.Instance.HighScore.ToString();
 	}
-	public override void Init(Action action)
+
+	public override void Reject()
 	{
-		base.Init(action);
-	}
-	public void Restart()
-	{
-		Game.Instance.UiManager.ClosePopUpUI("GameOverUI");
-		Response();
+		base.Reject();
+		Game.Instance.gameObject.GetComponent<SceneChange>().ChangeScene(SceneName.SelectMode);
 	}
 	public override void Close()
 	{

@@ -18,6 +18,6 @@ public class ScreenControl : MonoBehaviour, ICommand
 
     public void Applying()
     {
-        Game.Instance.UiManager.ClosePopUpUI(BlackoutEffects[index]);
+        Game.Instance.UiManager.ClosePopUpUI();
     }
 }

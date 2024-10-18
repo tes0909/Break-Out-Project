@@ -54,12 +54,15 @@ public class UI_Menu : UI_Popup
 
 	public void CloseThisPopUp()
 	{
-		Game.Instance.UiManager.ClosePopUpUI("MenuUI");
+		Game.Instance.UiManager.ClosePopUpUI();
 	}
+
 	public void OpenGameQuitUI()
 	{
-		Game.Instance.UiManager.OpenPopUpUI("GameQuitUI");
+		UI_DefaultPopup popup = Game.Instance.UiManager.OpenPopUpUI("DefaultPopup") as UI_DefaultPopup;
+		popup.Init("정말 게임을 종료하시겠습니까?", Game.Instance.GameManager.QuitGame);
 	}
+
 	public override void Close()
 	{
 		base.Close();

@@ -98,9 +98,6 @@ public class GameManager: IGameManager
         Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(3, StartGame);
     }
 
-
-
-
     public void PauseGame()
     {
         currentState = GameState.Paused;
@@ -110,8 +107,8 @@ public class GameManager: IGameManager
     public void GameOver()
     {
         currentState = GameState.Idle;
-        UI_GameOver ui = Game.Instance.UiManager.OpenPopUpUI("GameOverUI") as UI_GameOver;
-        ui.OnResponseEvent += CountDownGameStart;
+        UI_DefaultPopup ui = Game.Instance.UiManager.OpenPopUpUI("GameEndUI") as UI_DefaultPopup;
+        ui.Init("GameOver", CountDownGameStart);
         OnGameOver?.Invoke();
     }
 

@@ -6,11 +6,11 @@ public class UIManager
 {
 	public void Init()
 	{
-		_popups = new Dictionary<string, UI_Popup>();
+		_popups = new Stack<UI_Popup>();
 		_cache = new Dictionary<string, GameObject>();
 	}
 
-	private Dictionary<string, UI_Popup> _popups;
+	private Stack<UI_Popup> _popups;
 	private Dictionary<string, GameObject> _cache;
 	private int _sort = 0;
 	public UI_Popup OpenPopUpUI(string path, bool caching = true)
@@ -29,7 +29,7 @@ public class UIManager
 
 		SetCanvas(go);
 		go.SetActive(true);
-		_popups.Add(path, go.GetComponent<UI_Popup>());
+		_popups.Push(go.GetComponent<UI_Popup>());
 		return go.GetComponent<UI_Popup>();
 	}
 
@@ -46,11 +46,18 @@ public class UIManager
 		return go.GetComponent<UI_SubItem>() ;
 	}
 
-	public void ClosePopUpUI(string path)
+	public void ClosePopUpUI()
 	{
-		_popups[path].Close();
-		_popups.Remove(path);
+		_popups.Pop().Close();
 		_sort--;
+	}
+	public void CloseAllPopUp()
+	{
+		while(_popups.Count == 0)
+		{
+			_popups.Pop().Close();
+			_sort--;
+		}
 	}
 	public void ClearCache()
 	{

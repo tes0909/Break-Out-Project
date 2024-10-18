@@ -19,6 +19,6 @@ public class ScreenControlItem : test.Item
 
 	protected override void Applying()
 	{
-		Game.Instance.UiManager.ClosePopUpUI(BlackoutEffects[index]);
+		Game.Instance.UiManager.ClosePopUpUI();
 	}
 }
