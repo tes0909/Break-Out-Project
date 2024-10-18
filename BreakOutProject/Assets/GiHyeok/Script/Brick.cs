@@ -39,7 +39,12 @@ public class Brick : MonoBehaviour
         if (currentDurability == 1)
         {
             currentDurability--;
+            /*if (maxDurability == 2) 아이템 드랍
+            {
+                DropItem();
+            }*/
             gameObject.SetActive(false);
+            Game.Instance.GameManager.Score += 1;
         }
         else if (currentDurability == 2)
         {
@@ -51,24 +56,24 @@ public class Brick : MonoBehaviour
     private void DropItem()
     {
         int itemDrop = Random.Range(0, 100);
-        GameObject item = GameObject.Find("ItemPool").GetComponent<ItemPool>().GetItem();
+        GameObject item = GameObject.Find("PoolManager").GetComponent<PoolManager>().GetItem();
         item.SetActive(true);
         switch (itemDrop)
         {
             case <20: 
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.multiBall);
                 break;
 
             case < 40:
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.longPaddle);
                 break;
 
             case < 60:
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.timeControl);
                 break;
 
             case < 80:
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.powerBall);
+                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.screenControl);
                 break;
         }
         item.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
