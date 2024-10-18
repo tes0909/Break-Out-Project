@@ -28,8 +28,4 @@ public class UI_DefaultPopup : UI_Popup
 		base.Init(Yesaction, NoAction);
 		_text.text = text;
 	}
-	public override void Reject()
-	{
-		base.Reject();
-	}
 }

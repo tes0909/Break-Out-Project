@@ -80,15 +80,14 @@ public class GameManager: IGameManager
     public GameManager()
     {
 		currentState = GameState.Idle;
-		OnGameOver += PauseGame;
 	}
 
     public void StartGame()
     {
         score = 0;
-        currentState = GameState.playing;
+        currentState = GameState.Playing;
         Time.timeScale = 1f;
-        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(5, GameOver);
+        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(30, GameOver);
         OnGameStart?.Invoke(DifficultyLevel);
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
     }

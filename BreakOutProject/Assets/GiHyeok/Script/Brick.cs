@@ -56,7 +56,7 @@ public class Brick : MonoBehaviour
                     break;
                 }
             }
-            if(isLast = true)
+            if(isLast)
             {
                 Game.Instance.GameManager.GameClear();
             }

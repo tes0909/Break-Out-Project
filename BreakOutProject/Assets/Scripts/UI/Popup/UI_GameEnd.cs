@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_GameOver : UI_DefaultPopup
+public class UI_GameEnd : UI_DefaultPopup
 {
 	[SerializeField] private TMP_Text _nowScroeText;
 	[SerializeField] private TMP_Text _HighScoreText;
@@ -21,6 +21,7 @@ public class UI_GameOver : UI_DefaultPopup
 	{
 		base.Reject();
 		Game.Instance.gameObject.GetComponent<SceneChange>().ChangeScene(SceneName.SelectMode);
+		Debug.Log("À¸¿¨ ");
 	}
 	public override void Close()
 	{
