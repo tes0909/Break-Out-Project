@@ -26,6 +26,5 @@ public class SFXSoundVolume : MonoBehaviour, IVolume
 		AudioVolume = volume; // 슬라이더 값으로 AudioVolume 업데이트
 		PlayerPrefs.SetFloat("SFXVolume", AudioVolume); // 볼륨 저장
 		audioSource.volume = AudioVolume; // AudioSource의 볼륨 설정
-		Debug.Log(volume);
 	}
 }

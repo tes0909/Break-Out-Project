@@ -34,8 +34,8 @@ public class GameManager: IGameManager
     public GameState currentState { get; private set; }
     public int DifficultyLevel { get; private set; }
 
-    private int score; //Á¡¼ö
-    private int life = 3; //ÀÓÀÇ·Î ¸ñ¼û 3°³
+    private int score; //ï¿½ï¿½ï¿½ï¿½
+    private int life = 3; //ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ 3ï¿½ï¿½
 
     public event Action<int> OnScoreChanged;
     public event Action<int> OnLifeChanged;
@@ -52,7 +52,7 @@ public class GameManager: IGameManager
         get => life;
         set
         {
-            //¶óÀÌÇÁ °ªÀÌ º¯ÇÏ¸é
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½
             if (life != value)
             {
                 life = value;
@@ -119,11 +119,14 @@ public class GameManager: IGameManager
     public void GameClear()
     {
         currentState = GameState.LevelCleared;
-        Debug.Log("°ÔÀÓ Å¬¸®¾î");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½");
         if(score > ScoreboardManager.Instance.HighScore)
         {
             ScoreboardManager.Instance.AddScore(score);
         }
+		UI_DefaultPopup ui = Game.Instance.UiManager.OpenPopUpUI("GameEndUI") as UI_DefaultPopup;
+		ui.Init("GameClear", CountDownGameStart);
+		Debug.Log("ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½");
     }
 
     public void QuitGame()
