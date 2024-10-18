@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private int InputDirection;//플레이어가 키를 입력했을 때
     //[SerializeField] private BallStat ballStat;
     public BallMoveSO ballMoveSO;
+    public BallPowerSO ballPowerSO;
     private float BallSpeed; //공의 스피드
     private float BallRotation;//공의 회전 값
     InputManager inputManager;
@@ -48,7 +49,7 @@ public class Ball : MonoBehaviour
         {
             AddBallForce(Vector2.up, BallSpeed/2);
         }
-        if (BallRigidbody.velocity.y == 0)
+        if (BallRigidbody.velocity.y == 0 && BallRigidbody.velocity.x == 0)
         {
             BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
         }
