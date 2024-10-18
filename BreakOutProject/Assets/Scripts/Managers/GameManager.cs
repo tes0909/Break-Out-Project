@@ -115,6 +115,12 @@ public class GameManager: IGameManager
         OnGameOver?.Invoke();
     }
 
+    public void GameClear()
+    {
+        currentState = GameState.LevelCleared;
+        Debug.Log("게임 클리어");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
