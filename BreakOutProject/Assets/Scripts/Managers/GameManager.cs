@@ -33,7 +33,7 @@ public class GameManager: IGameManager
     public event Action<int> OnScoreChanged;
     public event Action<int> OnLifeChanged;
     public event Action OnGameOver;
-    public event Action OnGameClear;
+    public event Action OnGameCleared;
     public event Action<int> OnGameStart;
 
     private InGameScene inGameScene;
@@ -66,7 +66,6 @@ public class GameManager: IGameManager
             {
                 score = value;
                 OnScoreChanged?.Invoke(score);
-
             }
         }
     }
@@ -80,6 +79,7 @@ public class GameManager: IGameManager
 
     public void StartGame()
     {
+        score = 0;
         currentState = GameState.playing;
         Time.timeScale = 1f;
         Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(5, GameOver);
@@ -112,6 +112,12 @@ public class GameManager: IGameManager
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ClearedGame()
+    {
+        currentState = GameState.LevelCleared;
+        OnGameCleared?.Invoke();
     }
 
     public void SetDifficultyLevel(difficultyLevel difficultyLevel)
