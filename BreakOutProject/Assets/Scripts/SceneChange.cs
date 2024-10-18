@@ -19,6 +19,8 @@ public class SceneChange : MonoBehaviour//, ISceneChange
 
     public void ChangeScene(SceneName sceneName)
     {
+        Debug.Log("SceneChange");
+        Game.Instance.UiManager.ClearCache();
 		StartCoroutine(Trasition(sceneName));
 		//SceneManager.LoadScene(sceneName.ToString());
     }

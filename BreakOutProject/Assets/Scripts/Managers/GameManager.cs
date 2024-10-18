@@ -74,20 +74,20 @@ public class GameManager: IGameManager
             {
                 score = value;
                 OnScoreChanged?.Invoke(score);
-
             }
         }
     }
     public GameManager()
     {
 		currentState = GameState.Idle;
-		OnGameOver += PauseGame;
 	}
 
     public void StartGame()
     {
+        score = 0;
         currentState = GameState.Playing;
-        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(5, GameOver);
+        Time.timeScale = 1f;
+        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(30, GameOver);
         OnGameStart?.Invoke(DifficultyLevel);
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
     }
@@ -98,9 +98,6 @@ public class GameManager: IGameManager
         Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(3, StartGame);
     }
 
-
-
-
     public void PauseGame()
     {
         currentState = GameState.Paused;
@@ -110,9 +107,15 @@ public class GameManager: IGameManager
     public void GameOver()
     {
         currentState = GameState.Idle;
-        UI_GameOver ui = Game.Instance.UiManager.OpenPopUpUI("GameOverUI") as UI_GameOver;
-        ui.OnResponseEvent += CountDownGameStart;
+        UI_DefaultPopup ui = Game.Instance.UiManager.OpenPopUpUI("GameEndUI") as UI_DefaultPopup;
+        ui.Init("GameOver", CountDownGameStart);
         OnGameOver?.Invoke();
+    }
+
+    public void GameClear()
+    {
+        currentState = GameState.LevelCleared;
+        Debug.Log("게임 클리어");
     }
 
     public void QuitGame()

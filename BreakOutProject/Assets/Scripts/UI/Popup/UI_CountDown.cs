@@ -22,6 +22,6 @@ public class UI_CountDown : UI_Popup
 			yield return new WaitForSecondsRealtime(1f);
 			remainTime--;
 		}
-		Game.Instance.UiManager.ClosePopUpUI("CountdownUI");
+		Game.Instance.UiManager.ClosePopUpUI();
 	}
 }

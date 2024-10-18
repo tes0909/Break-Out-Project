@@ -9,13 +9,12 @@ public class InGameScene : BaseScene
 	{
 		base.Awake();
 		Game.Instance.UiManager.OpenSceneUI("GameSceneUI");
-		GameObject paddle = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Paddle"));
+		GameObject paddle = ResourceManager.Instantiate("Paddle");
 		paddle.transform.position = _paddleInitPosition;
 
-		GameObject brickManager = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Brick/BrickManager"));
-
-		GameObject walls = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Walls"));
-		GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Background2"));
+		ResourceManager.Instantiate("Brick/BrickManager");
+		ResourceManager.Instantiate("Background2");
+		ResourceManager.Instantiate("Walls");
 	}
 
     private void Start()

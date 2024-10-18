@@ -8,7 +8,6 @@ namespace test
 	public abstract class Item : MonoBehaviour
 	{
 		private Rigidbody2D _rb2d;
-		private bool _isSpawned = false;
 		protected SpriteRenderer _spriteRenderer;
 		protected float _duration = 1f;
 
@@ -19,7 +18,6 @@ namespace test
 		}
 		public virtual void Spawn(Vector2 position, float duration, float speed)
 		{
-			_isSpawned = true;
 			transform.position = position;
 			_duration = duration;
 			Drop(speed);

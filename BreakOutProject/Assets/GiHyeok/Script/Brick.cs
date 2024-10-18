@@ -44,7 +44,22 @@ public class Brick : MonoBehaviour
                 DropItem();
             }*/
             gameObject.SetActive(false);
+
             Game.Instance.GameManager.Score += 1;
+            // clear check
+            bool isLast = true;
+            foreach(GameObject obj in GameObject.Find("BrickManager(Clone)").GetComponent<PoolManager>().totalPool["brick"])
+            {
+                if (obj.activeSelf== true)
+                {
+                    isLast= false;
+                    break;
+                }
+            }
+            if(isLast)
+            {
+                Game.Instance.GameManager.GameClear();
+            }
         }
         else if (currentDurability == 2)
         {
