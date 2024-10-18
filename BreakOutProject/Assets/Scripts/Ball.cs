@@ -49,6 +49,10 @@ public class Ball : MonoBehaviour
         {
             AddBallForce(Vector2.up, BallSpeed/2);
         }
+        if(collision.collider.CompareTag("UpWall"))
+        {
+            ForceTheBall(Vector2.down, BallSpeed, BallRotation);
+        }
         if (BallRigidbody.velocity.y == 0 && BallRigidbody.velocity.x == 0)
         {
             BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
@@ -88,7 +92,6 @@ public class Ball : MonoBehaviour
         Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) * direction; // 위쪽 방향에 회전값을 적용
         BallRigidbody.velocity += bounceDirection * BallSpeed; // 회전 방향으로 속도 설정
     }
-
     public void DestroyThis()
     {
         Game.Instance.GameManager.OnGameOver -= DestroyThis;
