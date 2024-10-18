@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Rigidbody2D BallRigidbody;// ���� BallRigidbody.velocity
-    [SerializeField] private int InputDirection;//�÷��̾ Ű�� �Է����� ��
+    private Rigidbody2D BallRigidbody;// ???? BallRigidbody.velocity
+    [SerializeField] private int InputDirection;//?��???? ??? ??????? ??
     //[SerializeField] private BallStat ballStat;
     public BallMoveSO ballMoveSO;
     public BallPowerSO ballPowerSO;
-    private float BallSpeed; //���� ���ǵ�
-    private float BallRotation;//���� ȸ�� ��
-    InputManager inputManager;
+    private float BallSpeed; //???? ?????
+    private float BallRotation;//???? ??? ??
+    PlayerInputController inputController;
 
     protected BallStatHandler ballStats { get; private set; }
     void Awake()
@@ -31,14 +31,14 @@ public class Ball : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SoundManager.SoundInstance.PlaySFX(SoundManager.SoundInstance.SFX_Clips[1]);
+        //SoundManager.SoundInstance.PlaySFX(SoundManager.SoundInstance.SFX_Clips[1]);
 
         Vector2 bounceDirection = collision.contacts[0].normal;
         
         BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
 
 
-        if (collision.collider.CompareTag("Player"))//�÷��̾� �����ױ�
+        if (collision.collider.CompareTag("Player"))//?��???? ???????
         {
         ForceTheBall(Vector2.up, BallSpeed, BallRotation);
         }
@@ -62,32 +62,32 @@ public class Ball : MonoBehaviour
         switch (inputController.moveInput)
         {
             case -1f:
-                BallRotationEX = BallRotation;//�÷��̾� �ڵ鷯�� �������� �̵��� ��
+                BallRotationEX = BallRotation;//?��???? ????? ???????? ????? ??
                 break;
             case 0f:
                 int zeroRadom = Random.Range(-1, 2);
-                BallRotationEX = (BallRotation * zeroRadom);//ȸ������ -1,0,1�� �ϳ��� ��
+                BallRotationEX = (BallRotation * zeroRadom);//??????? -1,0,1?? ????? ??
                 break;
             case 1f:
-                BallRotationEX = (-1f) * BallRotation;//�÷��̾� �ڵ鷯�� ���������� �̵��� ��
+                BallRotationEX = (-1f) * BallRotation;//?��???? ????? ?????????? ????? ??
                 break;
             default:
                 break;
         }
 
-        // �浹 �� ƨ��� ������ �����մϴ�.
-        Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) *direction; // ���� ���⿡ ȸ������ ����
-        BallRigidbody.velocity = bounceDirection * BallSpeed; // ȸ�� �������� �ӵ� ����
+        // ?�� ?? ???? ?????? ????????.
+        Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) *direction; // ???? ???? ??????? ????
+        BallRigidbody.velocity = bounceDirection * BallSpeed; // ??? ???????? ??? ????
     }
-    private void AddBallForce(Vector2 direction, float BallSpeed)//���� �����ݴϴ�.
+    private void AddBallForce(Vector2 direction, float BallSpeed)//???? ????????.
     {
         float BallRotationEX = BallRotation;
         int zeroRadom = Random.Range(-1, 2);
-        BallRotationEX = (BallRotation * zeroRadom);//ȸ������ -1,0,1�� �ϳ��� ��
+        BallRotationEX = (BallRotation * zeroRadom);//??????? -1,0,1?? ????? ??
 
-        // �浹 �� ƨ��� ������ �����մϴ�.
-        Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) * direction; // ���� ���⿡ ȸ������ ����
-        BallRigidbody.velocity += bounceDirection * BallSpeed; // ȸ�� �������� �ӵ� ����
+        // ?�� ?? ???? ?????? ????????.
+        Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) * direction; // ???? ???? ??????? ????
+        BallRigidbody.velocity += bounceDirection * BallSpeed; // ??? ???????? ??? ????
     }
 
     public void DestroyThis()
