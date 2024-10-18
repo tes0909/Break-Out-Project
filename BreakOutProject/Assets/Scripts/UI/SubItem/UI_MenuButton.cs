@@ -12,6 +12,6 @@ public class UI_MenuButton : UI_SubItem
 	}
 	public void OpenMenuUI(PointerEventData eventData)
 	{
-		UIManager.Instance.OpenPopUpUI("MenuUI");
+		Game.Instance.UiManager.OpenPopUpUI("MenuUI");
 	}
 }

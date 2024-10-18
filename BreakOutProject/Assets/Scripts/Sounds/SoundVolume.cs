@@ -17,5 +17,6 @@ public class SoundVolume : MonoBehaviour
         AudioVolume = value; // 슬라이더 값으로 AudioVolume 업데이트
         PlayerPrefs.SetFloat("Volume", AudioVolume); // 볼륨 저장
         audioSource.volume = AudioVolume; // AudioSource의 볼륨 설정
+
     }
 }

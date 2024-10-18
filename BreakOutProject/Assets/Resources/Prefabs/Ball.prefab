@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7366219435117770810}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,6 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380721856c5964741bd5826b9467cdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BallSpeed: 0
   InputDirection: 0
-  BallRotation: 0
+  ballMoveSO: {fileID: 11400000, guid: 514a03b8e72937841b140ffdd8f66cbf, type: 2}
+  ballPowerSO: {fileID: 11400000, guid: 03d4782a221dea24c8c0bd04cfb251bb, type: 2}

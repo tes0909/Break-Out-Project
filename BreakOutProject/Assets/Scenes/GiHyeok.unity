@@ -215,52 +215,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &270833435
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 270833436}
-  - component: {fileID: 270833437}
-  m_Layer: 0
-  m_Name: ItemPoolManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &270833436
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270833435}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &270833437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270833435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b86d2ac4ff6cc84d8722d0d1f08785c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 5633785371940344125, guid: 85dceb71e6dad5c468dad6219b9eda12, type: 3}
-  maxItem: 5
 --- !u!1 &624847029
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,7 +793,7 @@ MonoBehaviour:
   brickSizeY: 0.8
   brickIntervalX: 0.2
   brickIntervalY: 0.2
-  brickPool: {fileID: 1464379902}
+  poolManager: {fileID: 1464379902}
 --- !u!1 &1464379901
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,7 +805,7 @@ GameObject:
   - component: {fileID: 1464379903}
   - component: {fileID: 1464379902}
   m_Layer: 0
-  m_Name: BrickPoolManager
+  m_Name: PoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -871,6 +825,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brickPrefab: {fileID: 5614627413939252316, guid: 2b796d092d1b7c24ab59a897568409c6, type: 3}
   maxbrick: 30
+  itemPrefab: {fileID: 5633785371940344125, guid: 85dceb71e6dad5c468dad6219b9eda12, type: 3}
+  maxItem: 5
 --- !u!4 &1464379903
 Transform:
   m_ObjectHideFlags: 0
@@ -1175,4 +1131,3 @@ SceneRoots:
   - {fileID: 1079493161}
   - {fileID: 1696659023}
   - {fileID: 1248792402}
-  - {fileID: 270833436}

@@ -23,13 +23,13 @@ public class BrickGenenrator : MonoBehaviour
     public float brickIntervalX;
     public float brickIntervalY;
 
-    public BrickPool brickPool;
+    public PoolManager poolManager;
 
     private int[,] brickPattern;
 	// Start is called before the first frame update
 	private void Awake()
 	{
-        GameManager.Instance.OnGameStart += GenenrateBrick;
+        Game.Instance.GameManager.OnGameStart += GenenrateBrick;
 	}
 
 	public void GenenrateBrick(int difficulty)
@@ -97,7 +97,7 @@ public class BrickGenenrator : MonoBehaviour
             {
                 if (brickPattern[y, x] > 0)
                 {
-                    GameObject obj = brickPool.GetBrick();
+                    GameObject obj = poolManager.GetBrick();
                     obj.SetActive(true);
                     obj.transform.position = new Vector2(brickRangeXMin + brickSizeX * x + brickIntervalX * x, brickRangeYTop - brickSizeY * y - brickIntervalY * y);
                     obj.GetComponent<Brick>().SetDurability(brickPattern[y,x]);
@@ -108,7 +108,7 @@ public class BrickGenenrator : MonoBehaviour
 
     public void ResetBrick()
     {
-        brickPool.Reset();
+        poolManager.ResetBrick();
     }
     // Update is called once per frame
 

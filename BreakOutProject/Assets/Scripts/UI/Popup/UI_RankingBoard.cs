@@ -19,13 +19,13 @@ public class UI_RankingBoard : UI_Popup
 		int rankCount = ScoreboardManager.Instance.Scores.Count;
 		for(int i = 0; i < rankCount; i++)
 		{
-			UI_SubItem ranking = UIManager.Instance.CreateSubItemUI("Ranking", _rankingLayout);
+			UI_SubItem ranking = Game.Instance.UiManager.CreateSubItemUI("Ranking", _rankingLayout);
 			ranking.Init(i);
 		}
 	}
 
 	private void CloseThisPopUP()
 	{
-		UIManager.Instance.ClosePopUpUI("RankingBoardUI");
+		Game.Instance.UiManager.ClosePopUpUI("RankingBoardUI");
 	}
 }

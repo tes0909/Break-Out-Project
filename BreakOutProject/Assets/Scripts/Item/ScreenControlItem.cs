@@ -13,12 +13,12 @@ public class ScreenControlItem : test.Item
 	protected override void Affect()
 	{
 		index = Random.Range(0, BlackoutEffects.Length);
-		UIManager.Instance.OpenPopUpUI(BlackoutEffects[index]);;
+		Game.Instance.UiManager.OpenPopUpUI(BlackoutEffects[index]);;
 		Invoke("Applying", _duration);
 	}
 
 	protected override void Applying()
 	{
-		UIManager.Instance.ClosePopUpUI(BlackoutEffects[index]);
+		Game.Instance.UiManager.ClosePopUpUI(BlackoutEffects[index]);
 	}
 }

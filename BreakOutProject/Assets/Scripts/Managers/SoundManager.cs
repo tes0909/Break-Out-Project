@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager SoundInstance { get; set; }
-
     [Header("Audio Sources")]
      AudioSource BGMSource; // 배경음용 AudioSource
      AudioSource SFXSource; // 효과음용 AudioSource
@@ -19,18 +17,9 @@ public class SoundManager : MonoBehaviour
     public bool BGMOnOff = true;
     public bool SFXOnOff = true;
 
+
     private void Awake()
     {
-        if (SoundInstance != null && SoundInstance != this)
-        {
-            Destroy(gameObject);
-            return;
-
-        }
-
-        SoundInstance = this;
-        DontDestroyOnLoad(gameObject);
-
         // 자식 오브젝트에서 AudioSource 가져오기
         audioSources = GetComponentsInChildren<AudioSource>();
         BGMSource = audioSources[0];
@@ -94,4 +83,12 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void SetBGMVolume(float volume)
+    {
+        BGMSource.GetComponent<BGMSoundVolume>().UpdateSoundVolume(volume);
+    }
+    public void SetSFXVolume(float volume)
+    {
+        SFXSource.GetComponent<SFXSoundVolume>().UpdateSoundVolume(volume);
+    }
 }

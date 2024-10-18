@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Rigidbody2D BallRigidbody;// °øÀÇ BallRigidbody.velocity
-    [SerializeField]
-    private float BallSpeed; //°øÀÇ ½ºÇÇµå
-    [SerializeField]
-    private int InputDirection;//ÇÃ·¹ÀÌ¾î°¡ Å°¸¦ ÀÔ·ÂÇßÀ» ¶§
-    [SerializeField]
-    private float BallRotation;//°øÀÇ È¸Àü °ª
+    private Rigidbody2D BallRigidbody;// ï¿½ï¿½ï¿½ï¿½ BallRigidbody.velocity
+    [SerializeField] private int InputDirection;//ï¿½Ã·ï¿½ï¿½Ì¾î°¡ Å°ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    //[SerializeField] private BallStat ballStat;
+    public BallMoveSO ballMoveSO;
+    public BallPowerSO ballPowerSO;
+    private float BallSpeed; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Çµï¿½
+    private float BallRotation;//ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½
+    InputManager inputManager;
 
-    PlayerInputController inputController;
+    protected BallStatHandler ballStats { get; private set; }
     void Awake()
     {
-        BallSpeed = 10f;
-        BallRotation = 40f;
+        ballStats = GetComponent<BallStatHandler>();
+        BallRigidbody = GetComponent<Rigidbody2D>();
+        BallSpeed = ballMoveSO.changeSpeed;//BallSpeed = 10f;
+        BallRotation = ballMoveSO.changeRotate;//BallRotation = 40f;
     }
 
     void Start()
@@ -24,60 +27,72 @@ public class Ball : MonoBehaviour
         inputController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputController>();
         BallRigidbody = GetComponent<Rigidbody2D>();
         BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
+        Game.Instance.GameManager.OnGameOver += DestroyThis;
     }
-    //private void FixedUpdate()
-    //{
-    //    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-    //    {
-    //        InputDirection = -1; // ¿ÞÂÊ ÀÌµ¿
-    //    }
-    //    else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-    //    {
-    //        InputDirection = 1; // ¿À¸¥ÂÊ ÀÌµ¿
-    //    }
-    //    else// ¾È¿òÁ÷ÀÌ¸é
-    //    {
-    //        InputDirection = 0;
-    //    }
-    //}
     private void OnCollisionEnter2D(Collision2D collision)
     {
         SoundManager.SoundInstance.PlaySFX(SoundManager.SoundInstance.SFX_Clips[1]);
 
         Vector2 bounceDirection = collision.contacts[0].normal;
+        
         BallRigidbody.AddForce(bounceDirection * BallSpeed, ForceMode2D.Impulse);
 
-        if (collision.collider.CompareTag("Player"))//ÇÃ·¹ÀÌ¾î ³×ÀÓÅ×±×
+
+        if (collision.collider.CompareTag("Player"))//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½×±ï¿½
         {
-            RotateArm();
+        ForceTheBall(Vector2.up, BallSpeed, BallRotation);
         }
         if (collision.collider.CompareTag("Brick"))
         {
             collision.gameObject.GetComponent<Brick>().GetDamage();
         }
+        if(collision.collider.CompareTag("SideWall"))
+        {
+            AddBallForce(Vector2.up, BallSpeed/2);
+        }
+        if (BallRigidbody.velocity.y == 0 && BallRigidbody.velocity.x == 0)
+        {
+            BallRigidbody.velocity = new Vector2(Random.Range(-1f, 1f) * BallSpeed, BallSpeed);
+        }
     }
-    private void RotateArm()
+    private void ForceTheBall(Vector2 direction,float BallSpeed, float BallRotation)
     {
+        direction.Normalize();
         float BallRotationEX = BallRotation;
         switch (inputController.moveInput)
         {
             case -1f:
-                BallRotationEX = BallRotation;//ÇÃ·¹ÀÌ¾î ÇÚµé·¯°¡ ¿ÞÂÊÀ¸·Î ÀÌµ¿ÇÒ ¶§
+                BallRotationEX = BallRotation;//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Úµé·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½
                 break;
             case 0f:
                 int zeroRadom = Random.Range(-1, 2);
-                BallRotationEX = (BallRotation * zeroRadom);//È¸Àü°ªÀÌ -1,0,1Áß ÇÏ³ª°¡ µÊ
+                BallRotationEX = (BallRotation * zeroRadom);//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -1,0,1ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½
                 break;
             case 1f:
-                BallRotationEX = (-1f) * BallRotation;//ÇÃ·¹ÀÌ¾î ÇÚµé·¯°¡ ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿ÇÒ ¶§
+                BallRotationEX = (-1f) * BallRotation;//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Úµé·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½
                 break;
             default:
                 break;
         }
-        Debug.Log(BallRotationEX);
-        //this.transform.rotation = Quaternion.Euler(0, 0, BallRotationEX);
-        // Ãæµ¹ ½Ã Æ¨±â´Â ¹æÇâÀ» ¼öÁ¤ÇÕ´Ï´Ù.
-        Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) * Vector2.up; // À§ÂÊ ¹æÇâ¿¡ È¸Àü°ªÀ» Àû¿ë
-        BallRigidbody.velocity = bounceDirection * BallSpeed; // È¸Àü ¹æÇâÀ¸·Î ¼Óµµ ¼³Á¤
+
+        // ï¿½æµ¹ ï¿½ï¿½ Æ¨ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+        Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) *direction; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        BallRigidbody.velocity = bounceDirection * BallSpeed; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
+    }
+    private void AddBallForce(Vector2 direction, float BallSpeed)//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ý´Ï´ï¿½.
+    {
+        float BallRotationEX = BallRotation;
+        int zeroRadom = Random.Range(-1, 2);
+        BallRotationEX = (BallRotation * zeroRadom);//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -1,0,1ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½
+
+        // ï¿½æµ¹ ï¿½ï¿½ Æ¨ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+        Vector2 bounceDirection = Quaternion.Euler(0, 0, BallRotationEX) * direction; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        BallRigidbody.velocity += bounceDirection * BallSpeed; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
+    }
+
+    public void DestroyThis()
+    {
+        Game.Instance.GameManager.OnGameOver -= DestroyThis;
+        Destroy(gameObject);
     }
 }

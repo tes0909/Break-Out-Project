@@ -7,7 +7,10 @@ using UnityEngine;
 public class UI_Popup : MonoBehaviour
 {
 	public event Action OnResponseEvent;
-	public virtual void Init() { }
+	public virtual void Init(Action action)
+	{
+		OnResponseEvent += action;
+	}
 
 	public virtual void Response() 
 	{
