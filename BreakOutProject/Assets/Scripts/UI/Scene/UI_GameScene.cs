@@ -16,26 +16,33 @@ public class UI_GameScene : UI_Scene
 
 	private void Awake()
 	{
-		CreateLife();
-		GameManager.Instance.OnLifeChanged += UpdateLife;
-		GameManager.Instance.OnScoreChanged += NowScoreText;
+		ScoreboardManager.Instance.OnHighScoreUpdated += UpdateHighScoreText;
+
+        CreateLife();
+		Game.Instance.GameManager.OnLifeChanged += UpdateLife;
+		Game.Instance.GameManager.OnScoreChanged += NowScoreText;
 
 		if(ScoreboardManager.Instance.Scores.Count > 0 && ScoreboardManager.Instance.Scores !=null)
 			_highScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
 
-		GameManager.Instance.gameObject.GetComponent<TimeManager>().OnChangeTime += UpdateTimerText;
+		Game.Instance.gameObject.GetComponent<TimeManager>().OnChangeTime += UpdateTimerText;
+	}
+
+	private void UpdateHighScoreText(int newHighScore)
+	{
+		_highScoreText.text = newHighScore.ToString();
 	}
 
 	private void CreateLife()
 	{
 		//Todo gamemanager에서 최대 hp가져오기
-		int _lifeCount = GameManager.Instance.Life;
+		int _lifeCount = Game.Instance.GameManager.Life;
 		if(_lifeIcons == null || _lifeIcons.Count == 0)
 		{
 			_lifeIcons = new List<UI_LifeIcon>();
 			for (int i = 0; i < _lifeCount; i++)
 			{
-				_lifeIcons.Add((UI_LifeIcon)UIManager.Instance.CreateSubItemUI("LifeIcon", _lifeLayout));
+				_lifeIcons.Add((UI_LifeIcon)Game.Instance.UiManager.CreateSubItemUI("LifeIcon", _lifeLayout));
 			}
 			return;
 		}
