@@ -4,11 +4,18 @@ using UnityEngine;
 
 public enum GameState
 {
-    playing,
-    paused,
+    Idle = 0,
+    Playing = 1,
+    Paused = 2,
     GameOver,
-    LevelCleared
+	LevelCleared
 }
+
+public interface ITimeHandler
+{
+    public void HandleTime();
+}
+
 
 public interface IGameManager
 {
@@ -32,8 +39,9 @@ public class GameManager: IGameManager
 
     public event Action<int> OnScoreChanged;
     public event Action<int> OnLifeChanged;
+
     public event Action OnGameOver;
-    public event Action OnGameCleared;
+    public event Action OnGameClear;
     public event Action<int> OnGameStart;
 
     private InGameScene inGameScene;
@@ -69,13 +77,11 @@ public class GameManager: IGameManager
             }
         }
     }
-
-
-    private void Awake()
+    public GameManager()
     {
-            currentState = GameState.paused;
-            OnGameOver += PauseGame;
-    }
+		currentState = GameState.Idle;
+		OnGameOver += PauseGame;
+	}
 
     public void StartGame()
     {
@@ -85,39 +91,40 @@ public class GameManager: IGameManager
         Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(5, GameOver);
         OnGameStart?.Invoke(DifficultyLevel);
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
-
     }
 
     public void CountDownGameStart()
     {
-        Time.timeScale = 1f;
         Game.Instance.UiManager.OpenPopUpUI("CountdownUI");
         Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(3, StartGame);
     }
 
+
+
+
     public void PauseGame()
     {
-        currentState = GameState.paused;
+        currentState = GameState.Paused;
         Time.timeScale = 0f;
     }
 
     public void GameOver()
     {
-        currentState = GameState.GameOver;
+        currentState = GameState.Idle;
         UI_GameOver ui = Game.Instance.UiManager.OpenPopUpUI("GameOverUI") as UI_GameOver;
         ui.OnResponseEvent += CountDownGameStart;
         OnGameOver?.Invoke();
     }
 
+    public void GameClear()
+    {
+        currentState = GameState.LevelCleared;
+        Debug.Log("게임 클리어");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    public void ClearedGame()
-    {
-        currentState = GameState.LevelCleared;
-        OnGameCleared?.Invoke();
     }
 
     public void SetDifficultyLevel(difficultyLevel difficultyLevel)

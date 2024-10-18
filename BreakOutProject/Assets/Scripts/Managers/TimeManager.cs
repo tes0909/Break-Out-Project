@@ -17,7 +17,8 @@ public class TimeManager : MonoBehaviour
 	public void Timer()
     {
         currentTime -= Time.deltaTime; //deltaTime을 정수형으로 형변환하면, 타이머 작동안함.
-        OnChangeTime(currentTime);
+        if(Game.Instance.GameManager.currentState==GameState.Playing)
+            OnChangeTime(currentTime);
         if(currentTime <= 0)
         {
             OnResponseTime?.Invoke();
@@ -37,7 +38,7 @@ public class TimeManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentTime > 0)
+        if (currentTime >= 0)
         {
             Timer();
         }
