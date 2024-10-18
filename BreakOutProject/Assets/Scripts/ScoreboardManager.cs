@@ -53,15 +53,8 @@ public class ScoreboardManager : MonoBehaviour
         {
             scoreData.highScore = newScore;
             OnHighScoreUpdated?.Invoke(newScore);
-        }
-
-        if (GameState.GameOver == Game.Instance.GameManager.currentState ||
-            GameState.LevelCleared == Game.Instance.GameManager.currentState)
-        {
-            Debug.Log($"{ GameState.GameOver} ,{GameState.LevelCleared}");
             AddScore(newScore);
         }
-
     }
 
     public void AddScore(int score)

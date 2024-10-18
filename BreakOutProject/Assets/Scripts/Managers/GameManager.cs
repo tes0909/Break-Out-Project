@@ -109,6 +109,10 @@ public class GameManager: IGameManager
         currentState = GameState.Idle;
         UI_DefaultPopup ui = Game.Instance.UiManager.OpenPopUpUI("GameEndUI") as UI_DefaultPopup;
         ui.Init("GameOver", CountDownGameStart);
+        if (score > ScoreboardManager.Instance.HighScore)
+        {
+            ScoreboardManager.Instance.AddScore(score);
+        }
         OnGameOver?.Invoke();
     }
 
@@ -116,6 +120,10 @@ public class GameManager: IGameManager
     {
         currentState = GameState.LevelCleared;
         Debug.Log("게임 클리어");
+        if(score > ScoreboardManager.Instance.HighScore)
+        {
+            ScoreboardManager.Instance.AddScore(score);
+        }
     }
 
     public void QuitGame()
