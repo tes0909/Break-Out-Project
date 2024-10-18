@@ -22,7 +22,7 @@ public class UIManager
 		}
 		else
 		{
-			go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/Popup/{path}"));
+			go = ResourceManager.Instantiate($"UI/Popup/{path}");
 			if (caching)
 				_cache.Add(path, go);
 		}
@@ -35,14 +35,14 @@ public class UIManager
 
 	public UI_Scene OpenSceneUI(string path)
 	{
-		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/Scene/{path}"));
+		GameObject go = ResourceManager.Instantiate($"UI/Scene/{path}");
 		SetCanvas(go,false);
 		return go.GetComponent<UI_Scene>();
 	}
 
 	public UI_SubItem CreateSubItemUI(string path,Transform parent=null)
 	{
-		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/SubItem/{path}"), parent);
+		GameObject go = ResourceManager.Instantiate($"UI/SubItem/{path}", parent);
 		return go.GetComponent<UI_SubItem>() ;
 	}
 

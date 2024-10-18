@@ -7,7 +7,7 @@ public class SelectScene : BaseScene
 	protected override void Awake()
 	{
 		base.Awake();
-		GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Scene/SelectSceneUI"));
+		Game.Instance.UiManager.OpenSceneUI("SelectSceneUI");
 	}
 	protected override void Close()
 	{
