@@ -16,6 +16,7 @@ public class ScoreboardManager : MonoBehaviour
     private ScoreData scoreData = new ScoreData();
 
     public static ScoreboardManager Instance;
+    public event Action<int> OnHighScoreUpdated;
 
     public int HighScore => scoreData.highScore;
     public List<int> Scores => scoreData.scores;
@@ -36,7 +37,10 @@ public class ScoreboardManager : MonoBehaviour
 	}
 	private void Start()
 	{
-		Game.Instance.GameManager.OnScoreChanged += UpdateHighScore;
+        if(Game.Instance != null)
+		{
+            Game.Instance.GameManager.OnScoreChanged += UpdateHighScore; 
+        }
 
 	}
 
@@ -45,6 +49,7 @@ public class ScoreboardManager : MonoBehaviour
         if (newScore > scoreData.highScore)
         {
             scoreData.highScore = newScore;
+            OnHighScoreUpdated?.Invoke(newScore);
         }
         if (GameState.GameOver == Game.Instance.GameManager.currentState ||
             GameState.LevelCleared == Game.Instance.GameManager.currentState)
@@ -61,15 +66,8 @@ public class ScoreboardManager : MonoBehaviour
 
         if (Scores.Count > 10) //리스트 10개 초과 시
         {
-            Scores.Remove(Scores[10]); //가장 낮은 수 제거
+            Scores.RemoveAt(10); //가장 낮은 수 제거
         }
-
-        // 최고 점수 갱신
-        if (score > scoreData.highScore)
-        {
-            scoreData.highScore = score;
-        }
-
         SaveScores();
     }
 
