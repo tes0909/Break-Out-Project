@@ -6,12 +6,8 @@ public class UIManager
 {
 	public void Init()
 	{
-
-		if (Game.Instance.UiManager == null)
-		{
-            Game.Instance.UiManager._cache = new Dictionary<string, GameObject>();
-            Game.Instance.UiManager._popups = new Dictionary<string, UI_Popup>();
-		}
+		_popups = new Dictionary<string, UI_Popup>();
+		_cache = new Dictionary<string, GameObject>();
 	}
 
 	private Dictionary<string, UI_Popup> _popups;

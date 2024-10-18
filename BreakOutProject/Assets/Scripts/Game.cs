@@ -11,7 +11,7 @@ public class Game:MonoBehaviour
     private SoundManager _soundManager;
 
     public GameManager GameManager => _gameManager;
-    public UIManager UiManager { get { Game.Instance.UiManager.Init(); return _uiManager; } }
+    public UIManager UiManager { get { return _uiManager; } }
 
 
     public SoundManager SoundManager
@@ -30,6 +30,8 @@ public class Game:MonoBehaviour
             _uiManager = new UIManager();
             _soundManager = new SoundManager();
             _gameManager = new GameManager();
+
+            _uiManager.Init();
 
         }
         else

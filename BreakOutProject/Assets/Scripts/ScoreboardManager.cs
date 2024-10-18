@@ -27,8 +27,6 @@ public class ScoreboardManager : MonoBehaviour
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
 			LoadScores();
-
-			Game.Instance.GameManager.OnScoreChanged += UpdateHighScore;
 		}
 		else
 		{
@@ -36,8 +34,13 @@ public class ScoreboardManager : MonoBehaviour
 		}
 
 	}
+	private void Start()
+	{
+		Game.Instance.GameManager.OnScoreChanged += UpdateHighScore;
 
-    private void UpdateHighScore(int newScore)
+	}
+
+	private void UpdateHighScore(int newScore)
     {
         if (newScore > scoreData.highScore)
         {
