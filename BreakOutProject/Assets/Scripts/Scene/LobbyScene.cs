@@ -13,14 +13,6 @@ public class LobbyScene : BaseScene
 		Game.Instance.UiManager.OpenSceneUI("LobbySceneUI");
 	}
 
-	private void InitGameManager()
-	{
-		GameObject gameManager = new GameObject("@GameManager");
-		gameManager.AddComponent<GameManager>();
-		gameManager.AddComponent<SceneChange>();
-		gameManager.AddComponent<ScoreboardManager>();
-	}
-
 	protected override void Close()
 	{
 		

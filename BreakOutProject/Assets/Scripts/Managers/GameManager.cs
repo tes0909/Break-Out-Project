@@ -22,7 +22,7 @@ public interface IGameManager
     void QuitGame();
 }
 
-public class GameManager : MonoBehaviour, IGameManager
+public class GameManager: IGameManager
 {
     public GameState currentState { get; private set; }
     public int DifficultyLevel { get; private set; }
@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour, IGameManager
 
     private void Awake()
     {
-            DontDestroyOnLoad(gameObject);
             currentState = GameState.paused;
             OnGameOver += PauseGame;
     }
@@ -83,6 +82,7 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         currentState = GameState.playing;
         Time.timeScale = 1f;
+        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(5, GameOver);
         OnGameStart?.Invoke(DifficultyLevel);
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
 
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         Time.timeScale = 1f;
         Game.Instance.UiManager.OpenPopUpUI("CountdownUI");
-        Invoke("StartGame", 3f);
+        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(3, StartGame);
     }
 
     public void PauseGame()

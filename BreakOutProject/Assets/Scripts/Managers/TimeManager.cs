@@ -12,13 +12,7 @@ public class TimeManager : MonoBehaviour
     public float CurrentTime => currentTime;
     
     public event Action<float> OnChangeTime;
-
-
-	public void Start()
-	{
-        Game.Instance.GameManager.OnGameStart += StartTimer;
-	}
-
+    public Action OnResponseTime;
 	//게임 시간 타이머
 	public void Timer()
     {
@@ -26,8 +20,14 @@ public class TimeManager : MonoBehaviour
         OnChangeTime(currentTime);
         if(currentTime <= 0)
         {
-            Game.Instance.GameManager.GameOver();
+            OnResponseTime?.Invoke();
         }
+    }
+
+    public void CountDown(float time, Action action)
+    {
+        currentTime = time;
+        OnResponseTime = action;
     }
 
     public void StartTimer(int difficulty)
@@ -37,7 +37,7 @@ public class TimeManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Game.Instance.GameManager.currentState == GameState.playing)
+        if (currentTime > 0)
         {
             Timer();
         }

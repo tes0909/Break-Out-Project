@@ -13,7 +13,7 @@ public class UI_StageLevelButton : UI_SubItem
 	private bool _isclicked;
 	public void Awake()
 	{
-		_sceneChanger = Game.Instance.GameManager.gameObject.GetComponent<SceneChange>();
+		_sceneChanger = Game.Instance.gameObject.GetComponent<SceneChange>();
 	}
 
 	public void Start()
