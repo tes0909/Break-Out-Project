@@ -26,7 +26,6 @@ public class Item : MonoBehaviour
 	public void SetItemType(ItemType itemType)
     {
 		command = ItemEffectFactory.CreateItem(itemType);
-        Debug.Log($"Sprites/{itemType.ToString()}");
 		_spriteRenderer.sprite = ResourceManager.Load<Sprite>($"Sprites/{itemType.ToString()}");
 	}
 

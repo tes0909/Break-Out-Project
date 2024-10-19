@@ -15,7 +15,7 @@ public class PoolManager : MonoBehaviour
         Queue<GameObject> brickPool = new Queue<GameObject>();
         for (int i = 0; i < maxbrick; i++)
         {
-            GameObject obj = Instantiate(brickPrefab);
+            GameObject obj = Instantiate(brickPrefab, this.transform);
             obj.SetActive(false);
             brickPool.Enqueue(obj);
         }
@@ -23,7 +23,7 @@ public class PoolManager : MonoBehaviour
         Queue<GameObject> itemPool = new Queue<GameObject>();
         for (int i = 0; i < maxItem; i++)
         {
-            GameObject obj = Instantiate(itemPrefab);
+            GameObject obj = Instantiate(itemPrefab, this.transform);
             obj.SetActive(false);
             itemPool.Enqueue(obj);
         }

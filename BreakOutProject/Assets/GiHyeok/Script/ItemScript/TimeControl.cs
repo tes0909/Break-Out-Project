@@ -12,7 +12,7 @@ public class TimeControl : IItemEffect
     public void Affect()
 	{
         Time.timeScale = _controlTime;
-        Game.Instance.StartCoroutine(Applying(_duration));
+		Game.Instance.StartCoroutine(Applying(_duration));
     }
 	public IEnumerator Applying(float delay)
 	{
