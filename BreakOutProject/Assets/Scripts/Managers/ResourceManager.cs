@@ -11,9 +11,12 @@ public class ResourceManager
 	public static GameObject Instantiate(string path, Transform parent = null)
 	{
 		return Instantiate(Load<GameObject>($"Prefabs/{path}"), parent);
+
 	}
 	public static GameObject Instantiate(GameObject gameObject, Transform parent = null)
 	{
-		return GameObject.Instantiate(gameObject, parent);
+		GameObject go =  GameObject.Instantiate(gameObject, parent);
+		go.name = go.name.Replace("(Clone)", "");
+		return go;
 	}
 }

@@ -39,16 +39,16 @@ public class Brick : MonoBehaviour
         if (currentDurability == 1)
         {
             currentDurability--;
-            /*if (maxDurability == 2) 아이템 드랍
-            {
+            //if (maxDurability == 2)
+            //{
                 DropItem();
-            }*/
+            //}
             gameObject.SetActive(false);
 
             Game.Instance.GameManager.Score += 1;
             // clear check
             bool isLast = true;
-            foreach(GameObject obj in GameObject.Find("BrickManager(Clone)").GetComponent<PoolManager>().totalPool["brick"])
+            foreach(GameObject obj in GameObject.Find("BrickManager").GetComponent<PoolManager>().totalPool["brick"])
             {
                 if (obj.activeSelf== true)
                 {
@@ -71,7 +71,7 @@ public class Brick : MonoBehaviour
     private void DropItem()
     {
         int itemDrop = Random.Range(0, 100);
-        GameObject item = GameObject.Find("PoolManager").GetComponent<PoolManager>().GetItem();
+        GameObject item = GameObject.Find("BrickManager").GetComponent<PoolManager>().GetItem();
         item.SetActive(true);
         switch (itemDrop)
         {
