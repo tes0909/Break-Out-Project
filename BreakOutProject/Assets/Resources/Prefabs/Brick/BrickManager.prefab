@@ -67,4 +67,4 @@ MonoBehaviour:
   brickPrefab: {fileID: 5614627413939252316, guid: 2b796d092d1b7c24ab59a897568409c6, type: 3}
   maxbrick: 30
   itemPrefab: {fileID: 5633785371940344125, guid: 85dceb71e6dad5c468dad6219b9eda12, type: 3}
-  maxItem: 0
+  maxItem: 10

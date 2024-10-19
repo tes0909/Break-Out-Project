@@ -28,10 +28,11 @@ public class Game:MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             _uiManager = new UIManager();
-            _gameManager = new GameManager();
+			_uiManager.Init();
+			_gameManager = new GameManager();
 
 			_soundManager = GetComponent<SoundManager>();
-			_uiManager.Init();
+			
 
         }
         else

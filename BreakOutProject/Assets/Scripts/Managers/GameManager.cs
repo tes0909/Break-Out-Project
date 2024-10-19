@@ -45,6 +45,7 @@ public class GameManager: IGameManager
     public event Action<int> OnGameStart;
 
     private InGameScene inGameScene;
+    private TimeManager timeManager;
 
 
     public int Life
@@ -80,6 +81,8 @@ public class GameManager: IGameManager
     public GameManager()
     {
 		currentState = GameState.Idle;
+        DifficultyLevel = 0;
+		timeManager = Game.Instance.gameObject.GetComponent<TimeManager>();
 	}
 
     public void StartGame()
@@ -87,15 +90,16 @@ public class GameManager: IGameManager
         score = 0;
         currentState = GameState.Playing;
         Time.timeScale = 1f;
-        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(30, GameOver);
+        timeManager.CountDown(30, GameOver);
         OnGameStart?.Invoke(DifficultyLevel);
-        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
+        ResourceManager.Instantiate("VecterBall");
+        //GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
     }
 
     public void CountDownGameStart()
     {
         Game.Instance.UiManager.OpenPopUpUI("CountdownUI");
-        Game.Instance.gameObject.GetComponent<TimeManager>().CountDown(3, StartGame);
+		timeManager.CountDown(3, StartGame);
     }
 
     public void PauseGame()
