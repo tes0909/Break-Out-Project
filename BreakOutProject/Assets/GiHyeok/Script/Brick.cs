@@ -70,27 +70,10 @@ public class Brick : MonoBehaviour
 
     private void DropItem()
     {
-        int itemDrop = Random.Range(0, 100);
+        int itemDrop = Random.Range(0, (int)ItemType.end);
         GameObject item = GameObject.Find("BrickManager").GetComponent<PoolManager>().GetItem();
         item.SetActive(true);
-        switch (itemDrop)
-        {
-            case <20: 
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.multiBall);
-                break;
-
-            case < 40:
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.longPaddle);
-                break;
-
-            case < 60:
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.timeControl);
-                break;
-
-            case < 80:
-                item.GetComponent<Item>().SetItemType(Item.itemTypeEnum.screenControl);
-                break;
-        }
+        item.GetComponent<Item>().SetItemType((ItemType)itemDrop);
         item.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
     }
 }
