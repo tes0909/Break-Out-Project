@@ -110,6 +110,11 @@ public class BrickGenenrator : MonoBehaviour
     {
         poolManager.ResetBrick();
     }
-    // Update is called once per frame
+
+	private void OnDestroy()
+	{
+		Game.Instance.GameManager.OnGameStart -= GenenrateBrick;
+	}
+	// Update is called once per frame
 
 }

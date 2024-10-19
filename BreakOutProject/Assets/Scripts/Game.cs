@@ -30,10 +30,7 @@ public class Game:MonoBehaviour
             _uiManager = new UIManager();
 			_uiManager.Init();
 			_gameManager = new GameManager();
-
 			_soundManager = GetComponent<SoundManager>();
-			
-
         }
         else
         {

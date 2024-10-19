@@ -23,13 +23,14 @@ public class UI_Popup : MonoBehaviour
 	{
 		Game.Instance.UiManager.ClosePopUpUI();
 		OnResponseEvent?.Invoke();
-		Debug.Log("왜 팝업이 안닫히는 거에요");
 	}
+
 	public virtual void Reject()
 	{
 		Game.Instance.UiManager.ClosePopUpUI();
 		OnRejectEvent?.Invoke();
 	}
+
 	public virtual void Close()
 	{
 		gameObject.SetActive(false);
