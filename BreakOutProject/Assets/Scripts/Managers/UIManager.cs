@@ -53,7 +53,7 @@ public class UIManager
 	}
 	public void CloseAllPopUp()
 	{
-		while(_popups.Count == 0)
+		while(_popups.Count > 0)
 		{
 			_popups.Pop().Close();
 			_sort--;

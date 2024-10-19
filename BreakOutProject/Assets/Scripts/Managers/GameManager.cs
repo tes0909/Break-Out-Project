@@ -65,7 +65,6 @@ public class GameManager: IGameManager
             }
         }
     }
-
     public int Score
     {
         get => score;
@@ -110,6 +109,8 @@ public class GameManager: IGameManager
 
     public void GameOver()
     {
+        Game.Instance.StopAllCoroutines();
+        Game.Instance.UiManager.CloseAllPopUp();
         currentState = GameState.Idle;
         UI_DefaultPopup ui = Game.Instance.UiManager.OpenPopUpUI("GameEndUI") as UI_DefaultPopup;
         ui.Init("GameOver", CountDownGameStart);
@@ -122,7 +123,10 @@ public class GameManager: IGameManager
 
     public void GameClear()
     {
-        currentState = GameState.LevelCleared;
+		Game.Instance.StopAllCoroutines();
+		Game.Instance.UiManager.CloseAllPopUp();
+
+		currentState = GameState.LevelCleared;
         Debug.Log("���� Ŭ����");
         if(score > ScoreboardManager.Instance.HighScore)
         {

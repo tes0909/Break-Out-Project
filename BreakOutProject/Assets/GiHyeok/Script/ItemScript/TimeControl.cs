@@ -7,7 +7,7 @@ public class TimeControl : IItemEffect
 	public float _duration=5f;
     public TimeControl()
     {
-        _controlTime = Random.Range(0.1f, 1.5f);
+        _controlTime = Random.Range(0.5f, 1.5f);
     }
     public void Affect()
 	{

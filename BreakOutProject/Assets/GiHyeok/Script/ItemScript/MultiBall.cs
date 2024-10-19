@@ -6,7 +6,7 @@ public class MultiBall : IItemEffect
     private GameObject ball;
     public MultiBall()
     {
-        ball = GameObject.Find("Ball");
+        ball = GameObject.Find("VectorBall");
     }
     public void Affect()
     {
