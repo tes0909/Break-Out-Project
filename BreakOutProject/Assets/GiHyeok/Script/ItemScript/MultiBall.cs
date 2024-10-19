@@ -1,21 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class MultiBall : MonoBehaviour, ICommand
+public class MultiBall : IItemEffect
 {
     private GameObject ball;
-    public void Awake()
+    public MultiBall()
     {
-        ball = GameObject.Find("Ball(Clone)");
+        ball = GameObject.Find("Ball");
     }
     public void Affect()
     {
-        //공 갯수 여러개로 증가
-        Instantiate(ball);
-        Instantiate(ball);
+        GameObject.Instantiate(ball);
+		GameObject.Instantiate(ball);
     }
-
-    public void Applying()
-    {
-
-    }
+	public IEnumerator Applying(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+	}
 }

@@ -16,13 +16,18 @@ public class Item : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
 
-    private ICommand command;
+    private IItemEffect command;
 
-	// Start is called before the first frame update
+	public void Awake()
+	{
+		_spriteRenderer = GetComponent<SpriteRenderer>();
+	}
+
 	public void SetItemType(ItemType itemType)
     {
 		command = ItemEffectFactory.CreateItem(itemType);
-		_spriteRenderer.sprite = ResourceManager.Load<Sprite>($"Sprite/{itemType.ToString()}");
+        Debug.Log($"Sprites/{itemType.ToString()}");
+		_spriteRenderer.sprite = ResourceManager.Load<Sprite>($"Sprites/{itemType.ToString()}");
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)

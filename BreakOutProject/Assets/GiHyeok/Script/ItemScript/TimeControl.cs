@@ -1,36 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class TimeControl :  MonoBehaviour, ICommand
+public class TimeControl : IItemEffect
 {
 	private float _controlTime;
-	private SpriteRenderer _spriteRenderer;
 	public float _duration=5f;
-    public void Awake()
+    public TimeControl()
     {
-		_spriteRenderer = GetComponent<SpriteRenderer>();
-        _controlTime = Random.Range(0f, 1.5f);
-        if (_controlTime < 0.01f)
-        {
-            _controlTime = 0f;
-            _spriteRenderer.color = Color.blue;
-        }
-        else if (_controlTime < 1f)
-        {
-            _spriteRenderer.color = Color.white;
-        }
-        else
-        {
-            _spriteRenderer.color = Color.red;
-        }
+        _controlTime = Random.Range(0.1f, 1.5f);
     }
     public void Affect()
 	{
         Time.timeScale = _controlTime;
-        Invoke("Applying", _duration);
+        Game.Instance.StartCoroutine(Applying(_duration));
     }
-
-	public void Applying()
+	public IEnumerator Applying(float delay)
 	{
-        Time.timeScale = 1f;
-    }
+		yield return new WaitForSeconds(delay);
+		Time.timeScale = 1f;
+	}
 }

@@ -2,7 +2,7 @@
 
 public class ItemEffectFactory
 {
-    public static ICommand CreateItem(ItemType type)
+    public static IItemEffect CreateItem(ItemType type)
     {
 		switch (type)
 		{
