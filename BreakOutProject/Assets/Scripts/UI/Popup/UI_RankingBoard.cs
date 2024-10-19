@@ -11,7 +11,15 @@ public class UI_RankingBoard : UI_Popup
 
 	public void Awake()
 	{
-		_background.onClick.AddListener(CloseThisPopUP);
+		_background.onClick.AddListener(CloseThisPopUP); 
+		foreach(int score in ScoreboardManager.Instance.Scores)
+		{
+			Debug.Log(score);
+		}
+		Debug.Log(ScoreboardManager.Instance.Scores.Count);
+		CreateRanking();
+
+
 
 	}
 	public void CreateRanking()

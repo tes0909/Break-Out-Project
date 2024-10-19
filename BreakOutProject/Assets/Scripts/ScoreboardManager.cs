@@ -43,7 +43,7 @@ public class ScoreboardManager : MonoBehaviour
 	{
         if (Game.Instance != null)
         {
-            Game.Instance.GameManager.OnScoreChanged += UpdateHighScore;
+            Game.Instance.GameManager.OnScoreChanged += AddScore;
         }
 	}
 
