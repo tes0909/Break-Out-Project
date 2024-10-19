@@ -70,7 +70,10 @@ public class Brick : MonoBehaviour
 
     private void DropItem()
     {
-        int itemDrop = Random.Range(0, (int)ItemType.end);
+        int itemDrop = Random.Range(0, (int)ItemType.end+1);
+        if(itemDrop == (int)ItemType.end)
+            return;
+
         GameObject item = GameObject.Find("BrickManager").GetComponent<PoolManager>().GetItem();
         item.SetActive(true);
         item.GetComponent<Item>().SetItemType((ItemType)itemDrop);
