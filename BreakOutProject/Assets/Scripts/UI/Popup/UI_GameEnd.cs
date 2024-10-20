@@ -13,11 +13,17 @@ public class UI_GameEnd : UI_DefaultPopup
 	public override void Awake()
 	{
 		base.Awake();
-		_nowScroeText.text = Game.Instance.GameManager.Score.ToString();
-		_HighScoreText.text = ScoreboardManager.Instance.HighScore.ToString();
+        Game.Instance.GameManager.OnScoreChanged += NowScoreText;
+        _nowScroeText.text = Game.Instance.GameManager.Score.ToString();
+        _HighScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
 	}
 
-	public override void Reject()
+    private void NowScoreText(int score)
+    {
+        _nowScroeText.text = Game.Instance.GameManager.Score.ToString();
+    }
+
+    public override void Reject()
 	{
 		base.Reject();
 		Game.Instance.gameObject.GetComponent<SceneChange>().ChangeScene(SceneName.SelectMode);

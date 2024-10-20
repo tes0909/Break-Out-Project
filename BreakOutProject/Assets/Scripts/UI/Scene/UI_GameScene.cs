@@ -22,7 +22,7 @@ public class UI_GameScene : UI_Scene
 
         if (ScoreboardManager.Instance.Scores.Count > 0 && ScoreboardManager.Instance.Scores != null)
         {
-            _highScoreText.text = ScoreboardManager.Instance.HighScore.ToString();
+            _highScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
         }
         else
         {
