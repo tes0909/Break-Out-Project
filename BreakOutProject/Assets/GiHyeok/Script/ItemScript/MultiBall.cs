@@ -10,8 +10,11 @@ public class MultiBall : IItemEffect
     }
     public void Affect()
     {
-        GameObject.Instantiate(ball);
-		GameObject.Instantiate(ball);
+        for(int i = 0 ; i < 2; i++)
+        {
+			GameObject ball1 = ResourceManager.Instantiate("VectorBall");
+            ball.transform.position = ball.transform.position;
+		}
     }
 	public IEnumerator Applying(float delay)
 	{

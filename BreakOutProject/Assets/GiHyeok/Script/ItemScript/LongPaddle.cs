@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LongPaddle : IItemEffect
 {
     public float _duration = 5f;
-    private float[] lengthList = { 0.5f, 1.5f };
+    private float[] lengthList = {1.5f, 2.0f };
     private float length;
     private Transform paddle;
     public LongPaddle()
@@ -15,7 +16,7 @@ public class LongPaddle : IItemEffect
     public void Affect()
     {
         //패들 길이 증가or감소
-        paddle.localScale *= length;
+        paddle.localScale = new Vector3(paddle.localScale.x*length, paddle.localScale.y, paddle.localScale.z);
 		Game.Instance.StartCoroutine(Applying(_duration));
 	}
 

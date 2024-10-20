@@ -8,8 +8,8 @@ public enum difficultyLevel : int
 {
 	easy = 0,
 	normal = 1,
-	hard = 2,
-	special = 3,
+	//hard = 2,
+	//special = 3,
     end,
 }
 public class BrickGenenrator : MonoBehaviour
@@ -45,13 +45,13 @@ public class BrickGenenrator : MonoBehaviour
                 GenerateNormal();
                 break;
 
-            case difficultyLevel.hard:
-                GenerateHard();
-                break;
+            //case difficultyLevel.hard:
+            //    GenerateHard();
+            //    break;
 
-            case difficultyLevel.special:
-                GenerateSpecial();
-                break;
+            //case difficultyLevel.special:
+            //    GenerateSpecial();
+            //    break;
         }
     }
 

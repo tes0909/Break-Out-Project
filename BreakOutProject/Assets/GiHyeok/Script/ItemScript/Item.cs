@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum ItemType
 {
-	multiBall = 1,
-	longPaddle = 2,
-	screenControl = 3,
-	timeControl = 4,
+	multiBall = 0,
+	longPaddle = 1,
+	screenControl = 2,
+	timeControl = 3,
 	end
 }
 
