@@ -21,6 +21,7 @@ public class TimeManager : MonoBehaviour
             OnChangeTime?.Invoke(currentTime);
         if(currentTime <= 0)
         {
+            if (OnResponseTime != null && OnResponseTime == Game.Instance.GameManager.GameEnd) { Game.Instance.GameManager.ChangeCurrentState(GameState.GameOver); }
             OnResponseTime?.Invoke();
         }
     }

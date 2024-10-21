@@ -25,7 +25,7 @@ public interface IGameManager
     void StartGame();
     void CountDownGameStart();
     void PauseGame();
-    void GameOver();
+    void GameEnd();
     void QuitGame();
 }
 
@@ -60,7 +60,8 @@ public class GameManager: IGameManager
                 OnLifeChanged?.Invoke(life);
                 if (life <= 0)
                 {
-                    GameOver();
+                    currentState = GameState.GameOver;
+                    GameEnd();
                 }
             }
         }
@@ -93,7 +94,7 @@ public class GameManager: IGameManager
         score = 0;
         currentState = GameState.Playing;
         Time.timeScale = 1f;
-        timeManager.CountDown(30, GameOver);
+        timeManager.CountDown(30, GameEnd);
         OnGameStart?.Invoke(DifficultyLevel);
         ResourceManager.Instantiate("VecterBall");
         //GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
@@ -111,7 +112,7 @@ public class GameManager: IGameManager
         Time.timeScale = 0f;
     }
 
-    public void GameOver()
+    /*public void GameOver()
     {
         Game.Instance.StopAllCoroutines();
         Game.Instance.UiManager.CloseAllPopUp();
@@ -123,9 +124,9 @@ public class GameManager: IGameManager
             ScoreboardManager.Instance.AddScore(score);
         }
         OnGameOver?.Invoke();
-    }
+    }*/
 
-    public void GameClear()
+    /*public void GameClear()
     {
 		Game.Instance.StopAllCoroutines();
 		Game.Instance.UiManager.CloseAllPopUp();
@@ -139,6 +140,29 @@ public class GameManager: IGameManager
 		UI_DefaultPopup ui = Game.Instance.UiManager.OpenPopUpUI("GameEndUI") as UI_DefaultPopup;
 		ui.Init("GameClear", CountDownGameStart);
 		Debug.Log("���� Ŭ����");
+    }*/
+
+    public void GameEnd()
+    {
+        Game.Instance.StopAllCoroutines();
+        Game.Instance.UiManager.CloseAllPopUp();
+
+        UI_DefaultPopup ui = Game.Instance.UiManager.OpenPopUpUI("GameEndUI") as UI_DefaultPopup;
+        if (score > ScoreboardManager.Instance.HighScore)
+        {
+            ScoreboardManager.Instance.AddScore(score);
+        }
+
+        if (currentState == GameState.GameOver)
+        {
+            ui.Init("GameOver", CountDownGameStart);
+            OnGameOver?.Invoke();
+        }
+        else
+        {
+            currentState=GameState.LevelCleared;
+            ui.Init("GameOver", CountDownGameStart);
+        }
     }
 
     public void QuitGame()
@@ -149,5 +173,10 @@ public class GameManager: IGameManager
     public void SetDifficultyLevel(difficultyLevel difficultyLevel)
     {
         DifficultyLevel = (int)difficultyLevel;
+    }
+
+    public void ChangeCurrentState(GameState gamseState)
+    {
+        currentState = gamseState;
     }
 }
