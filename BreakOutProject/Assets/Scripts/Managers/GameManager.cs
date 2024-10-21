@@ -98,7 +98,7 @@ public class GameManager: IGameManager
         Time.timeScale = 1f;
         timeManager.CountDown(30, GameEnd);
         OnGameStart?.Invoke(DifficultyLevel);
-        ResourceManager.Instantiate("VecterBall");
+        ResourceManager.Instantiate("VectorBall");
         Life = 1;
 	}
 
