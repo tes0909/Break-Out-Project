@@ -50,7 +50,7 @@ public class Brick : MonoBehaviour
             Game.Instance.GameManager.DestroyCount++;
             if(Game.Instance.GameManager.DestroyCount==Game.Instance.GameManager.MaxBrick)
             {
-                Game.Instance.GameManager.GameClear();
+                Game.Instance.GameManager.GameEnd();
             }
         }
         else if (currentDurability == 2)
