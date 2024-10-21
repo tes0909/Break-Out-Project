@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DefaultBallMoveSO
   m_EditorClassIdentifier: 
   changeRotate: 0.5
-  changeSpeed: 10
+  changeSpeed: 7
