@@ -8,10 +8,21 @@ public class LongPaddle : IItemEffect
     private float[] lengthList = {1.5f, 2.0f };
     private float length;
     private Transform paddle;
+    public Color color { get; set; } = Color.white;
     public LongPaddle()
     {
         paddle = GameObject.Find("Paddle").transform.GetChild(0).transform;
         length = lengthList[Random.Range(0, 1)];
+        switch (length) 
+        {
+            case 1.5f:
+                color = Color.white;
+                break;
+
+            case 2.0f:
+                color = Color.blue;
+                break;
+        }
     }
     public void Affect()
     {

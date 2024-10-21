@@ -4,6 +4,7 @@ using UnityEngine;
 public class MultiBall : IItemEffect
 {
     private GameObject ball;
+    public Color color { get; set; } = Color.white;
     public MultiBall()
     {
         ball = GameObject.Find("VectorBall");
