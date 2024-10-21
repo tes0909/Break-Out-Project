@@ -5,16 +5,15 @@ public class MultiBall : IItemEffect
 {
     private GameObject ball;
     public Color color { get; set; } = Color.white;
-    public MultiBall()
-    {
-        ball = GameObject.Find("VectorBall");
-    }
+
     public void Affect()
     {
-        for(int i = 0 ; i < 2; i++)
+        ball = GameObject.Find("VectorBall");
+        for (int i = 0 ; i < 2; i++)
         {
-			GameObject ball1 = ResourceManager.Instantiate("VecterBall");
+			GameObject ball1 = ResourceManager.Instantiate("VectorBall");
             Game.Instance.GameManager.Life++;
+            ball1.transform.position = ball.transform.position;
 		}
     }
 	public IEnumerator Applying(float delay)
