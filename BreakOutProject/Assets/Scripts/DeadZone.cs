@@ -5,13 +5,16 @@ using UnityEngine;
 public class DeadZone : MonoBehaviour
 {
 
-    private void OnTriggerEnter2D(Collider2D other)
+	private void OnTriggerEnter2D(Collider2D other)
     {
-        // 충돌한 모든 오브젝트를 파괴
-        Destroy(other.gameObject);
+        if (other.gameObject.CompareTag("Item"))
+        {
+            other.gameObject.SetActive(false);
+        }
         if (other.gameObject.CompareTag("Ball"))
         {
-            Game.Instance.GameManager.GameOver();
+            Destroy(other.gameObject);
+			Game.Instance.GameManager.Life--;
         }
         Debug.Log(other.gameObject.name + " has been destroyed.");
     }

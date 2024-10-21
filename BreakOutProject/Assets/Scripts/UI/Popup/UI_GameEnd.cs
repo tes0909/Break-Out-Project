@@ -13,22 +13,13 @@ public class UI_GameEnd : UI_DefaultPopup
 	public override void Awake()
 	{
 		base.Awake();
-        Game.Instance.GameManager.OnScoreChanged += NowScoreText;
-		ScoreboardManager.Instance.OnHighScoreUpdated += HighScoreUpdate;
-        _nowScroeText.text = Game.Instance.GameManager.Score.ToString();
-        _HighScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
 	}
 
-    private void HighScoreUpdate(int obj)
-    {
-        _HighScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
-    }
-
-    private void NowScoreText(int score)
-    {
-        _nowScroeText.text = Game.Instance.GameManager.Score.ToString();
-    }
-
+	public void OnEnable()
+	{
+		_nowScroeText.text = Game.Instance.GameManager.Score.ToString();
+		_HighScoreText.text = ScoreboardManager.Instance.Scores[0].ToString();
+	}
     public override void Reject()
 	{
 		base.Reject();

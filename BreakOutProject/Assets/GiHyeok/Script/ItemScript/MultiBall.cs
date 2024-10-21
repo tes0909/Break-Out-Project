@@ -13,8 +13,8 @@ public class MultiBall : IItemEffect
     {
         for(int i = 0 ; i < 2; i++)
         {
-			GameObject ball1 = ResourceManager.Instantiate("VectorBall");
-            ball.transform.position = ball.transform.position;
+			GameObject ball1 = ResourceManager.Instantiate("VecterBall");
+            Game.Instance.GameManager.Life++;
 		}
     }
 	public IEnumerator Applying(float delay)

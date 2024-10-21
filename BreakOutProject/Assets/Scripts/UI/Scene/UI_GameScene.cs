@@ -40,16 +40,15 @@ public class UI_GameScene : UI_Scene
 
     private void CreateLife()
     {
-        //Todo gamemanager에서 최대 hp가져오기
-        int _lifeCount = Game.Instance.GameManager.Life;
+        _lifeCount = Game.Instance.GameManager.Life;
         if (_lifeIcons == null || _lifeIcons.Count == 0)
         {
             _lifeIcons = new List<UI_LifeIcon>();
-            for (int i = 0; i < _lifeCount; i++)
+            for (int i = 0; i < 10; i++)
             {
                 _lifeIcons.Add((UI_LifeIcon)Game.Instance.UiManager.CreateSubItemUI("LifeIcon", _lifeLayout));
+                _lifeIcons[i].gameObject.SetActive(false);
             }
-            return;
         }
         for (int i = 0; i < _lifeCount; ++i)
         {
@@ -70,8 +69,15 @@ public class UI_GameScene : UI_Scene
 
     public void UpdateLife(int life)
     {
-        _lifeIcons[_lifeCount].gameObject.SetActive(false);
-        _lifeCount = life;
+        for(int i  = 0; i < life; i++)
+        {
+			_lifeIcons[i].gameObject.SetActive(true);
+		}
+        for(int i = life; i < 10; i++)
+        {
+			_lifeIcons[i].gameObject.SetActive(false);
+		}
+
     }
 
 }

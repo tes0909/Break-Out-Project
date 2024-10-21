@@ -14,7 +14,6 @@ public class BounceBall : MonoBehaviour
         ballStats = GetComponent<BallStatHandler>();
         inputController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputController>();
         direction = new Vector2(Random.Range(-1f,2f), 1).normalized; // 초기 방향
-        Game.Instance.GameManager.OnGameOver += DestroyThis;
     }
 
     void Update()
@@ -55,7 +54,6 @@ public class BounceBall : MonoBehaviour
     }
     public void DestroyThis()
     {
-        Game.Instance.GameManager.OnGameOver -= DestroyThis;
         Destroy(gameObject);
     }
 }

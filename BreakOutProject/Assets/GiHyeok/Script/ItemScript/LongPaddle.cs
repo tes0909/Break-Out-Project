@@ -40,7 +40,7 @@ public class LongPaddle : IItemEffect
 	public IEnumerator Applying(float delay)
 	{
 		yield return new WaitForSeconds(delay);
-		paddle.transform.localScale /= length;
+        paddle.localScale = Vector3.one;
 
 	}
 }
