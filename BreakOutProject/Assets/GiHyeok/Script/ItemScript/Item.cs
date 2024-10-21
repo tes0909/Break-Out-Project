@@ -27,6 +27,7 @@ public class Item : MonoBehaviour
     {
 		command = ItemEffectFactory.CreateItem(itemType);
 		_spriteRenderer.sprite = ResourceManager.Load<Sprite>($"Sprites/{itemType.ToString()}");
+		_spriteRenderer.color = command.color;
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScreenControl : IItemEffect
@@ -6,9 +7,20 @@ public class ScreenControl : IItemEffect
     private string[] BlackoutEffects = { "ItemEffect/BlackOutUI", "ItemEffect/HalfBlackOutUI" };
     private int index = -1;
     public float _duration = 5f;
+    public Color color { get; set; } = Color.white;
     public ScreenControl()
     {
         index = Random.Range(0, BlackoutEffects.Length);
+        switch (index) 
+        {
+            case 0:
+                color = Color.red;
+                break;
+
+            case 1:
+                color = Color.white;
+                break;
+        }
     }
     public void Affect()
     {
