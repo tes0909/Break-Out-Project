@@ -80,4 +80,12 @@ public class UI_GameScene : UI_Scene
 
     }
 
+	public void OnDestroy()
+	{
+		Game.Instance.GameManager.OnLifeChanged -= UpdateLife;
+		Game.Instance.GameManager.OnScoreChanged -= NowScoreText;
+		ScoreboardManager.Instance.OnHighScoreUpdated -= UpdateHighScoreText;
+	}
+
+
 }

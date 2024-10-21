@@ -125,14 +125,18 @@ public class GameManager: IGameManager
     {
 		ui.Init("GameClear", CountDownGameStart);
         OnGameOver?.Invoke();
-
 	}
 
-    public void GameEnd()
+	public void GameEnd()
     {
         Game.Instance.StopAllCoroutines();
         Game.Instance.UiManager.CloseAllPopUp();
-		currentState = GameState.Idle;
+        Time.timeScale = 1f;
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+        foreach(GameObject ball in balls)
+        {
+            GameObject.Destroy(ball);
+        }
 
 		if (score > ScoreboardManager.Instance.HighScore)
         {
@@ -150,7 +154,8 @@ public class GameManager: IGameManager
         {
             GameClear(ui);
         }
-    }
+		currentState = GameState.Idle;
+	}
 
     public void QuitGame()
     {
