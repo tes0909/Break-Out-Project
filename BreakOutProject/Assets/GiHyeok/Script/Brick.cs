@@ -47,16 +47,8 @@ public class Brick : MonoBehaviour
 
             Game.Instance.GameManager.Score += 1;
             // clear check
-            bool isLast = true;
-            foreach(GameObject obj in GameObject.Find("BrickManager").GetComponent<PoolManager>().totalPool["brick"])
-            {
-                if (obj.activeSelf== true)
-                {
-                    isLast= false;
-                    break;
-                }
-            }
-            if(isLast)
+            Game.Instance.GameManager.DestroyCount++;
+            if(Game.Instance.GameManager.DestroyCount==Game.Instance.GameManager.MaxBrick)
             {
                 Game.Instance.GameManager.GameClear();
             }

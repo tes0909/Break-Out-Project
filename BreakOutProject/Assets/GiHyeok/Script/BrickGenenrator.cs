@@ -75,6 +75,8 @@ public class BrickGenenrator : MonoBehaviour
                                       { 0, 0, 0, 0, 0, 0, 0, 0},
                                       { 0, 0, 0, 0, 0, 0, 0, 0}};
         GenerateBrickByPattern();
+        Game.Instance.GameManager.MaxBrick = 24;
+        Game.Instance.GameManager.DestroyCount = 0;
     }
 
     private void GenerateEasy()
@@ -86,7 +88,9 @@ public class BrickGenenrator : MonoBehaviour
                                       { 0, 0, 0, 0, 0, 0, 0, 0},
                                       { 0, 0, 0, 0, 0, 0, 0, 0}};
 
-        GenerateBrickByPattern(); 
+        GenerateBrickByPattern();
+        Game.Instance.GameManager.MaxBrick = 12;
+        Game.Instance.GameManager.DestroyCount = 0;
     }
 
     private void GenerateBrickByPattern()

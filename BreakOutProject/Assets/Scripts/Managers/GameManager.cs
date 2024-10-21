@@ -77,6 +77,10 @@ public class GameManager: IGameManager
             }
         }
     }
+
+    public int MaxBrick;
+
+    public int DestroyCount; 
     public GameManager()
     {
 		currentState = GameState.Idle;
