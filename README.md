@@ -1,4 +1,5 @@
 # 록끼끼 - 벽돌깨기
+![image](/Image/TitleImage.png)
 > 내일배움 캠프 Unity 6기 유니티 입문주차 프로젝트  
 > 2024.10.15 ~ 2024.10.22
 ### 맴버 및 역할 분담
@@ -18,13 +19,13 @@
 ### 조작 방법
 - 좌우 이동 : A D
 ### 아이템
-[!image](BreakOutProject\Assets\Resources\Sprites\longPaddle.png)
+![image](/BreakOutProject/Assets/Resources/Sprites/longPaddle.png)  
 패들이 길어지는 아이템  
-[!image](BreakOutProject\Assets\Resources\Sprites\multiBall.png)
+![image](/BreakOutProject/Assets/Resources/Sprites/multiBall.png)  
 공이 여러개 생기는 아이템  
-[!image](BreakOutProject\Assets\Resources\Sprites\screenControl.png)
+![image](/BreakOutProject/Assets/Resources/Sprites/screenControl.png)  
 화면을 가리는 아이템  
-[!image](BreakOutProject\Assets\Resources\Sprites\timeControl.png)
+![image](/BreakOutProject/Assets/Resources/Sprites/timeControl.png)  
 시간이 빨라지거나 느려지는 아이템  
 
 ## 구현 상세
