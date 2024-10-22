@@ -31,6 +31,9 @@
 ## 구현 상세
 ### 사용 에셋
 - sprite : chat gpt의 Dall-e 모델 사용
+- background :
+    - https://assetstore.unity.com/packages/2d/environments/2d-pixel-art-platformer-biome-american-forest-255694
+    - https://assetstore.unity.com/packages/2d/environments/2d-pixel-art-platformer-biome-american-forest-255694
 - sound : https://pixabay.com/ko/sound-effects/
 ### 기술
 - 사용자 입력
